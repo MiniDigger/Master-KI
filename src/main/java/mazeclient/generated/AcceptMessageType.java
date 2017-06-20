@@ -5,11 +5,9 @@
 // Generiert: 2015.05.27 um 09:04:47 AM CEST 
 //
 
-
 package mazeclient.generated;
 
 import javax.xml.bind.annotation.*;
-
 
 /**
  * <p>Java-Klasse für AcceptMessageType complex type.
@@ -29,50 +27,44 @@ import javax.xml.bind.annotation.*;
  * &lt;/complexType>
  * </pre>
  */
-@XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "AcceptMessageType", propOrder = {
-        "accept",
-        "errorCode"
-})
-public class AcceptMessageType {
+@XmlAccessorType(XmlAccessType.FIELD) @XmlType(name = "AcceptMessageType", propOrder = { "accept",
+		"errorCode" }) public class AcceptMessageType {
 
-    protected boolean accept;
-    @XmlElement(required = true)
-    @XmlSchemaType(name = "string")
-    protected ErrorType errorCode;
+	protected boolean accept;
+	@XmlElement(required = true) @XmlSchemaType(name = "string") protected ErrorType errorCode;
 
-    /**
-     * Ruft den Wert der accept-Eigenschaft ab.
-     */
-    public boolean isAccept() {
-        return accept;
-    }
+	/**
+	 * Ruft den Wert der accept-Eigenschaft ab.
+	 */
+	public boolean isAccept() {
+		return accept;
+	}
 
-    /**
-     * Legt den Wert der accept-Eigenschaft fest.
-     */
-    public void setAccept(boolean value) {
-        this.accept = value;
-    }
+	/**
+	 * Legt den Wert der accept-Eigenschaft fest.
+	 */
+	public void setAccept(boolean value) {
+		this.accept = value;
+	}
 
-    /**
-     * Ruft den Wert der errorCode-Eigenschaft ab.
-     *
-     * @return possible object is
-     * {@link ErrorType }
-     */
-    public ErrorType getErrorCode() {
-        return errorCode;
-    }
+	/**
+	 * Ruft den Wert der errorCode-Eigenschaft ab.
+	 *
+	 * @return possible object is
+	 * {@link ErrorType }
+	 */
+	public ErrorType getErrorCode() {
+		return errorCode;
+	}
 
-    /**
-     * Legt den Wert der errorCode-Eigenschaft fest.
-     *
-     * @param value allowed object is
-     *              {@link ErrorType }
-     */
-    public void setErrorCode(ErrorType value) {
-        this.errorCode = value;
-    }
+	/**
+	 * Legt den Wert der errorCode-Eigenschaft fest.
+	 *
+	 * @param value allowed object is
+	 *              {@link ErrorType }
+	 */
+	public void setErrorCode(ErrorType value) {
+		this.errorCode = value;
+	}
 
 }

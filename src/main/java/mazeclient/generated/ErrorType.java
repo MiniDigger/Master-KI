@@ -5,12 +5,10 @@
 // Generiert: 2015.05.27 um 09:04:47 AM CEST 
 //
 
-
 package mazeclient.generated;
 
 import javax.xml.bind.annotation.XmlEnum;
 import javax.xml.bind.annotation.XmlType;
-
 
 /**
  * <p>Java-Klasse für ErrorType.
@@ -31,24 +29,16 @@ import javax.xml.bind.annotation.XmlType;
  * &lt;/simpleType>
  * </pre>
  */
-@XmlType(name = "ErrorType")
-@XmlEnum
-public enum ErrorType {
+@XmlType(name = "ErrorType") @XmlEnum public enum ErrorType {
 
-    NOERROR,
-    ERROR,
-    AWAIT_LOGIN,
-    AWAIT_MOVE,
-    ILLEGAL_MOVE,
-    TIMEOUT,
-    TOO_MANY_TRIES;
+	NOERROR, ERROR, AWAIT_LOGIN, AWAIT_MOVE, ILLEGAL_MOVE, TIMEOUT, TOO_MANY_TRIES;
 
-    public String value() {
-        return name();
-    }
+	public String value() {
+		return name();
+	}
 
-    public static mazeclient.generated.ErrorType fromValue(String v) {
-        return valueOf(v);
-    }
+	public static mazeclient.generated.ErrorType fromValue(String v) {
+		return valueOf(v);
+	}
 
 }

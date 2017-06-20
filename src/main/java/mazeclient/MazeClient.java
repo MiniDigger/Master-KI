@@ -54,10 +54,10 @@ public class MazeClient {
 		}
 	}
 
-	public boolean handshake() {
+	public boolean handshake(String name) {
 		// send login msg
 		LoginMessageType loginMessageType = objectFactory.createLoginMessageType();
-		loginMessageType.setName("Martin");
+		loginMessageType.setName(name);
 		MazeCom mazeCom = objectFactory.createMazeCom();
 		mazeCom.setLoginMessage(loginMessageType);
 		mazeCom.setMcType(MazeComType.LOGIN);
@@ -89,17 +89,36 @@ public class MazeClient {
 
 			// do our moves, we got 3 tries
 			for (int i = 0; i < 3; i++) {
-				// send move
-				MazeCom mazeCom = objectFactory.createMazeCom();
-				MoveMessageType moveMsg = handler.move(this);
-				mazeCom.setMoveMessage(moveMsg);
-				mazeCom.setMcType(MazeComType.MOVE);
-				send(mazeCom);
+				// send move (handler has to call move!)
+				handler.doMove();
 
 				// check if move was ok
-				// TODO read reply
+				MazeCom mazeCom = read();
+				if (msg.getMcType() != MazeComType.ACCEPT) {
+					logger.warning("Expected ACCEPT, got " + mazeCom.getMcType());
+					continue;
+				}
+				AcceptMessageType acceptMessage = mazeCom.getAcceptMessage();
+				if (acceptMessage.isAccept()) {
+					// doMove was ok, we are done here
+					break;
+				} else {
+					// try another move
+					logger.warning(
+							"Got error from server (try " + (i + 1) + "/3)" + acceptMessage.getErrorCode().name() + " "
+									+ acceptMessage.getErrorCode().value());
+				}
 			}
 		}
+	}
+
+	public void move() {
+		MazeCom mazeCom = objectFactory.createMazeCom();
+		MoveMessageType moveMsg = objectFactory.createMoveMessageType();
+		//TODO move msg
+		mazeCom.setMoveMessage(moveMsg);
+		mazeCom.setMcType(MazeComType.MOVE);
+		send(mazeCom);
 	}
 
 	private void send(MazeCom msg) {
@@ -135,9 +154,8 @@ public class MazeClient {
 		return sw.toString();
 	}
 
-	@FunctionalInterface
-	interface MoveHandler {
+	@FunctionalInterface interface MoveHandler {
 
-		MoveMessageType move(MazeClient context);
+		void doMove();
 	}
 }

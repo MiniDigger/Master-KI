@@ -5,13 +5,11 @@
 // Generiert: 2015.05.27 um 09:04:47 AM CEST 
 //
 
-
 package mazeclient.generated;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlType;
-
 
 /**
  * <p>Java-Klasse für LoginReplyMessageType complex type.
@@ -30,26 +28,23 @@ import javax.xml.bind.annotation.XmlType;
  * &lt;/complexType>
  * </pre>
  */
-@XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "LoginReplyMessageType", propOrder = {
-        "newID"
-})
-public class LoginReplyMessageType {
+@XmlAccessorType(XmlAccessType.FIELD) @XmlType(name = "LoginReplyMessageType", propOrder = {
+		"newID" }) public class LoginReplyMessageType {
 
-    protected int newID;
+	protected int newID;
 
-    /**
-     * Ruft den Wert der newID-Eigenschaft ab.
-     */
-    public int getNewID() {
-        return newID;
-    }
+	/**
+	 * Ruft den Wert der newID-Eigenschaft ab.
+	 */
+	public int getNewID() {
+		return newID;
+	}
 
-    /**
-     * Legt den Wert der newID-Eigenschaft fest.
-     */
-    public void setNewID(int value) {
-        this.newID = value;
-    }
+	/**
+	 * Legt den Wert der newID-Eigenschaft fest.
+	 */
+	public void setNewID(int value) {
+		this.newID = value;
+	}
 
 }

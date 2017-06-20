@@ -5,13 +5,11 @@
 // Generiert: 2015.05.27 um 09:04:47 AM CEST 
 //
 
-
 package mazeclient.generated;
 
 import javax.xml.bind.annotation.XmlEnum;
 import javax.xml.bind.annotation.XmlEnumValue;
 import javax.xml.bind.annotation.XmlType;
-
 
 /**
  * <p>Java-Klasse für treasureType.
@@ -53,84 +51,54 @@ import javax.xml.bind.annotation.XmlType;
  * &lt;/simpleType>
  * </pre>
  */
-@XmlType(name = "treasureType")
-@XmlEnum
-@SuppressWarnings("nls")
-public enum TreasureType {
+@XmlType(name = "treasureType") @XmlEnum @SuppressWarnings("nls") public enum TreasureType {
 
-    @XmlEnumValue("Start01")
-    START_01("Start01"),
-    @XmlEnumValue("Start02")
-    START_02("Start02"),
-    @XmlEnumValue("Start03")
-    START_03("Start03"),
-    @XmlEnumValue("Start04")
-    START_04("Start04"),
-    @XmlEnumValue("sym01")
-    SYM_01("sym01"),
-    @XmlEnumValue("sym02")
-    SYM_02("sym02"),
-    @XmlEnumValue("sym03")
-    SYM_03("sym03"),
-    @XmlEnumValue("sym04")
-    SYM_04("sym04"),
-    @XmlEnumValue("sym05")
-    SYM_05("sym05"),
-    @XmlEnumValue("sym06")
-    SYM_06("sym06"),
-    @XmlEnumValue("sym07")
-    SYM_07("sym07"),
-    @XmlEnumValue("sym08")
-    SYM_08("sym08"),
-    @XmlEnumValue("sym09")
-    SYM_09("sym09"),
-    @XmlEnumValue("sym10")
-    SYM_10("sym10"),
-    @XmlEnumValue("sym11")
-    SYM_11("sym11"),
-    @XmlEnumValue("sym12")
-    SYM_12("sym12"),
-    @XmlEnumValue("sym13")
-    SYM_13("sym13"),
-    @XmlEnumValue("sym14")
-    SYM_14("sym14"),
-    @XmlEnumValue("sym15")
-    SYM_15("sym15"),
-    @XmlEnumValue("sym16")
-    SYM_16("sym16"),
-    @XmlEnumValue("sym17")
-    SYM_17("sym17"),
-    @XmlEnumValue("sym18")
-    SYM_18("sym18"),
-    @XmlEnumValue("sym19")
-    SYM_19("sym19"),
-    @XmlEnumValue("sym20")
-    SYM_20("sym20"),
-    @XmlEnumValue("sym21")
-    SYM_21("sym21"),
-    @XmlEnumValue("sym22")
-    SYM_22("sym22"),
-    @XmlEnumValue("sym23")
-    SYM_23("sym23"),
-    @XmlEnumValue("sym24")
-    SYM_24("sym24");
-    private final String value;
+	@XmlEnumValue("Start01")
+	START_01("Start01"), @XmlEnumValue("Start02")
+	START_02("Start02"), @XmlEnumValue("Start03")
+	START_03("Start03"), @XmlEnumValue("Start04")
+	START_04("Start04"), @XmlEnumValue("sym01")
+	SYM_01("sym01"), @XmlEnumValue("sym02")
+	SYM_02("sym02"), @XmlEnumValue("sym03")
+	SYM_03("sym03"), @XmlEnumValue("sym04")
+	SYM_04("sym04"), @XmlEnumValue("sym05")
+	SYM_05("sym05"), @XmlEnumValue("sym06")
+	SYM_06("sym06"), @XmlEnumValue("sym07")
+	SYM_07("sym07"), @XmlEnumValue("sym08")
+	SYM_08("sym08"), @XmlEnumValue("sym09")
+	SYM_09("sym09"), @XmlEnumValue("sym10")
+	SYM_10("sym10"), @XmlEnumValue("sym11")
+	SYM_11("sym11"), @XmlEnumValue("sym12")
+	SYM_12("sym12"), @XmlEnumValue("sym13")
+	SYM_13("sym13"), @XmlEnumValue("sym14")
+	SYM_14("sym14"), @XmlEnumValue("sym15")
+	SYM_15("sym15"), @XmlEnumValue("sym16")
+	SYM_16("sym16"), @XmlEnumValue("sym17")
+	SYM_17("sym17"), @XmlEnumValue("sym18")
+	SYM_18("sym18"), @XmlEnumValue("sym19")
+	SYM_19("sym19"), @XmlEnumValue("sym20")
+	SYM_20("sym20"), @XmlEnumValue("sym21")
+	SYM_21("sym21"), @XmlEnumValue("sym22")
+	SYM_22("sym22"), @XmlEnumValue("sym23")
+	SYM_23("sym23"), @XmlEnumValue("sym24")
+	SYM_24("sym24");
+	private final String value;
 
-    TreasureType(String v) {
-        value = v;
-    }
+	TreasureType(String v) {
+		value = v;
+	}
 
-    public String value() {
-        return value;
-    }
+	public String value() {
+		return value;
+	}
 
-    public static mazeclient.generated.TreasureType fromValue(String v) {
-        for (mazeclient.generated.TreasureType c : mazeclient.generated.TreasureType.values()) {
-            if (c.value.equals(v)) {
-                return c;
-            }
-        }
-        throw new IllegalArgumentException(v);
-    }
+	public static mazeclient.generated.TreasureType fromValue(String v) {
+		for (mazeclient.generated.TreasureType c : mazeclient.generated.TreasureType.values()) {
+			if (c.value.equals(v)) {
+				return c;
+			}
+		}
+		throw new IllegalArgumentException(v);
+	}
 
 }

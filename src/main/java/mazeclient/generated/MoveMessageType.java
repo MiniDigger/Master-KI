@@ -5,14 +5,12 @@
 // Generiert: 2015.05.27 um 09:04:47 AM CEST 
 //
 
-
 package mazeclient.generated;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
-
 
 /**
  * <p>Java-Klasse für MoveMessageType complex type.
@@ -33,77 +31,72 @@ import javax.xml.bind.annotation.XmlType;
  * &lt;/complexType>
  * </pre>
  */
-@XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "MoveMessageType", propOrder = {
+@XmlAccessorType(XmlAccessType.FIELD) @XmlType(name = "MoveMessageType", propOrder = {
 
-})
-public class MoveMessageType {
+}) public class MoveMessageType {
 
-    @XmlElement(required = true)
-    protected PositionType shiftPosition;
-    @XmlElement(required = true)
-    protected PositionType newPinPos;
-    @XmlElement(required = true)
-    protected mazeclient.generated.CardType shiftCard;
+	@XmlElement(required = true) protected PositionType shiftPosition;
+	@XmlElement(required = true) protected PositionType newPinPos;
+	@XmlElement(required = true) protected mazeclient.generated.CardType shiftCard;
 
-    /**
-     * Ruft den Wert der shiftPosition-Eigenschaft ab.
-     *
-     * @return possible object is
-     * {@link PositionType }
-     */
-    public PositionType getShiftPosition() {
-        return shiftPosition;
-    }
+	/**
+	 * Ruft den Wert der shiftPosition-Eigenschaft ab.
+	 *
+	 * @return possible object is
+	 * {@link PositionType }
+	 */
+	public PositionType getShiftPosition() {
+		return shiftPosition;
+	}
 
-    /**
-     * Legt den Wert der shiftPosition-Eigenschaft fest.
-     *
-     * @param value allowed object is
-     *              {@link PositionType }
-     */
-    public void setShiftPosition(PositionType value) {
-        this.shiftPosition = value;
-    }
+	/**
+	 * Legt den Wert der shiftPosition-Eigenschaft fest.
+	 *
+	 * @param value allowed object is
+	 *              {@link PositionType }
+	 */
+	public void setShiftPosition(PositionType value) {
+		this.shiftPosition = value;
+	}
 
-    /**
-     * Ruft den Wert der newPinPos-Eigenschaft ab.
-     *
-     * @return possible object is
-     * {@link PositionType }
-     */
-    public PositionType getNewPinPos() {
-        return newPinPos;
-    }
+	/**
+	 * Ruft den Wert der newPinPos-Eigenschaft ab.
+	 *
+	 * @return possible object is
+	 * {@link PositionType }
+	 */
+	public PositionType getNewPinPos() {
+		return newPinPos;
+	}
 
-    /**
-     * Legt den Wert der newPinPos-Eigenschaft fest.
-     *
-     * @param value allowed object is
-     *              {@link PositionType }
-     */
-    public void setNewPinPos(PositionType value) {
-        this.newPinPos = value;
-    }
+	/**
+	 * Legt den Wert der newPinPos-Eigenschaft fest.
+	 *
+	 * @param value allowed object is
+	 *              {@link PositionType }
+	 */
+	public void setNewPinPos(PositionType value) {
+		this.newPinPos = value;
+	}
 
-    /**
-     * Ruft den Wert der shiftCard-Eigenschaft ab.
-     *
-     * @return possible object is
-     * {@link mazeclient.generated.CardType }
-     */
-    public mazeclient.generated.CardType getShiftCard() {
-        return shiftCard;
-    }
+	/**
+	 * Ruft den Wert der shiftCard-Eigenschaft ab.
+	 *
+	 * @return possible object is
+	 * {@link mazeclient.generated.CardType }
+	 */
+	public mazeclient.generated.CardType getShiftCard() {
+		return shiftCard;
+	}
 
-    /**
-     * Legt den Wert der shiftCard-Eigenschaft fest.
-     *
-     * @param value allowed object is
-     *              {@link mazeclient.generated.CardType }
-     */
-    public void setShiftCard(CardType value) {
-        this.shiftCard = value;
-    }
+	/**
+	 * Legt den Wert der shiftCard-Eigenschaft fest.
+	 *
+	 * @param value allowed object is
+	 *              {@link mazeclient.generated.CardType }
+	 */
+	public void setShiftCard(CardType value) {
+		this.shiftCard = value;
+	}
 
 }

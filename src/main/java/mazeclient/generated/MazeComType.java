@@ -5,12 +5,10 @@
 // Generiert: 2015.05.27 um 09:04:47 AM CEST 
 //
 
-
 package mazeclient.generated;
 
 import javax.xml.bind.annotation.XmlEnum;
 import javax.xml.bind.annotation.XmlType;
-
 
 /**
  * <p>Java-Klasse für MazeComType.
@@ -31,24 +29,16 @@ import javax.xml.bind.annotation.XmlType;
  * &lt;/simpleType>
  * </pre>
  */
-@XmlType(name = "MazeComType")
-@XmlEnum
-public enum MazeComType {
+@XmlType(name = "MazeComType") @XmlEnum public enum MazeComType {
 
-    LOGIN,
-    LOGINREPLY,
-    AWAITMOVE,
-    MOVE,
-    ACCEPT,
-    WIN,
-    DISCONNECT;
+	LOGIN, LOGINREPLY, AWAITMOVE, MOVE, ACCEPT, WIN, DISCONNECT;
 
-    public String value() {
-        return name();
-    }
+	public String value() {
+		return name();
+	}
 
-    public static mazeclient.generated.MazeComType fromValue(String v) {
-        return valueOf(v);
-    }
+	public static mazeclient.generated.MazeComType fromValue(String v) {
+		return valueOf(v);
+	}
 
 }
