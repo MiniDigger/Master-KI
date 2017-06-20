@@ -2,6 +2,7 @@ package mazeclient;
 
 import java.net.Socket;
 
+import mazeclient.generated.LoginMessageType;
 import mazeclient.generated.MazeCom;
 
 /**
@@ -30,11 +31,23 @@ public class MazeClient {
     }
 
     public boolean handshake() {
+        // send login msg
+        MazeCom mazeCom = null;//TODO
+        LoginMessageType loginMessageType = null;//TODO
+        loginMessageType.setName("Martin");
+        mazeCom.setLoginMessage(loginMessageType);
+        send(mazeCom);
+        // read login reply msg
         //TODO handshake
         return false;
     }
 
     private void send(MazeCom msg) {
         //TODO send msg
+    }
+
+    private MazeCom read() {
+        // TODO read msg
+        return null;
     }
 }
