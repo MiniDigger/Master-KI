@@ -29,7 +29,8 @@ public class MazeClient {
 
 	private boolean doNextMove = true;
 
-	private int playerId;
+	private int playerId = -1;
+	private int moveTry = 0;
 
 	public MazeClient() {
 		objectFactory = new ObjectFactory();
@@ -82,32 +83,31 @@ public class MazeClient {
 				logger.warning("Expected AWAITMOVE, got " + msg.getMcType() + "!");
 				continue;
 			}
-
+			moveTry++;
 			// save data
 			AwaitMoveMessageType awaitMoveMsg = msg.getAwaitMoveMessage();
 			readDataHandler.handleData(awaitMoveMsg);
 
-			// do our moves, we got 3 tries
-			for (int i = 0; i < 3; i++) {
-				// send move (handler has to call move!)
-				handler.doMove();
+			// send move (handler has to call move!)
+			handler.doMove();
 
-				// check if move was ok
-				MazeCom mazeCom = read();
-				if (msg.getMcType() != MazeComType.ACCEPT) {
-					logger.warning("Expected ACCEPT, got " + mazeCom.getMcType());
-					continue;
-				}
-				AcceptMessageType acceptMessage = mazeCom.getAcceptMessage();
-				if (acceptMessage.isAccept()) {
-					// doMove was ok, we are done here
-					break;
-				} else {
-					// try another move
-					logger.warning(
-							"Got error from server (try " + (i + 1) + "/3)" + acceptMessage.getErrorCode().name() + " "
-									+ acceptMessage.getErrorCode().value());
-				}
+			// check if move was ok
+			MazeCom mazeCom = read();
+			if (mazeCom.getMcType() != MazeComType.ACCEPT) {
+				logger.warning("Expected ACCEPT, got " + mazeCom.getMcType());
+				continue;
+			}
+
+			AcceptMessageType acceptMessage = mazeCom.getAcceptMessage();
+			if (acceptMessage.isAccept()) {
+				// doMove was ok, we are done here
+				moveTry = 0;
+				break;
+			} else {
+				// try another move
+				logger.warning(
+						"Got error from server (try " + moveTry + "/3): " + acceptMessage.getErrorCode().name() + " "
+								+ acceptMessage.getErrorCode().value());
 			}
 		}
 	}
@@ -152,6 +152,14 @@ public class MazeClient {
 		StringWriter sw = new StringWriter();
 		marshaller.marshal(message, sw);
 		return sw.toString();
+	}
+
+	public int getPlayerId() {
+		return playerId;
+	}
+
+	public int getMoveTry() {
+		return moveTry;
 	}
 
 	@FunctionalInterface interface MoveHandler {
