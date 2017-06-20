@@ -1,7 +1,9 @@
 package mazeclient;
 
-import mazeclient.generated.TreasureType;
+import mazeclient.generated.CardType;
 
+import java.io.InputStreamReader;
+import java.util.Scanner;
 import java.util.logging.Logger;
 
 /**
@@ -10,6 +12,10 @@ import java.util.logging.Logger;
 public class Main {
 
 	private static final Logger logger = Logger.getLogger(Main.class.getName());
+
+	private static Scanner scanner = new Scanner(new InputStreamReader(System.in));
+
+	private static CardType shiftCard;
 
 	public static void main(String[] args) {
 		MazeClient mazeClient = new MazeClient();
@@ -29,12 +35,16 @@ public class Main {
 
 		mazeClient.setReadDataHandler((data -> {
 			// TODO do stuff with data here
+			shiftCard = data.getBoard().getShiftCard();
 		}));
 
 		mazeClient.setMoveHandler(() -> {
 			// TODO do KI here
-			mazeClient.move(0, 0, 0, 0, new boolean[4], TreasureType.SYM_01);
+			mazeClient.move(0, 0, 0, 0, shiftCard);
 		});
+
+		// todo debug client (overrides KI!)
+		mazeClient.setMoveHandler(() -> readMoveFromCmd(mazeClient));
 
 		mazeClient.setErrorHandler((msg, expectedType) -> {
 			logger.warning("Expected " + expectedType.value() + ", got " + msg.getMcType());
@@ -45,5 +55,12 @@ public class Main {
 		});
 
 		mazeClient.listen();
+	}
+
+	private static void readMoveFromCmd(MazeClient mazeClient) {
+		logger.info("Please input move...");
+		String[] args = scanner.next().split(";");
+		mazeClient.move(Integer.parseInt(args[0]), Integer.parseInt(args[1]), Integer.parseInt(args[2]),
+				Integer.parseInt(args[3]), shiftCard);
 	}
 }

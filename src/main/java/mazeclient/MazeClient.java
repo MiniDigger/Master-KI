@@ -1,8 +1,6 @@
 package mazeclient;
 
 import mazeclient.generated.*;
-import mazeclient.generated.CardType.Openings;
-import mazeclient.generated.CardType.Pin;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
@@ -148,7 +146,7 @@ public class MazeClient {
 		}
 	}
 
-	public void move(int playerX, int playerY, int cardX, int cardY, boolean[] openings, TreasureType treasure) {
+	public void move(int playerX, int playerY, int cardX, int cardY, CardType shiftCard) {
 		MazeCom mazeCom = objectFactory.createMazeCom();
 		MoveMessageType moveMsg = objectFactory.createMoveMessageType();
 		PositionType playerPos = objectFactory.createPositionType();
@@ -157,19 +155,9 @@ public class MazeClient {
 		PositionType cardPos = objectFactory.createPositionType();
 		cardPos.setCol(cardX);
 		cardPos.setRow(cardY);
-		CardType card = objectFactory.createCardType();
-		Openings cardOpenings = objectFactory.createCardTypeOpenings();
-		cardOpenings.setTop(openings[0]);
-		cardOpenings.setRight(openings[1]);
-		cardOpenings.setBottom(openings[2]);
-		cardOpenings.setLeft(openings[3]);
-		card.setOpenings(cardOpenings);
-		Pin pin = objectFactory.createCardTypePin();
-		card.setPin(pin);
-		card.setTreasure(treasure);
 
 		moveMsg.setNewPinPos(playerPos);
-		moveMsg.setShiftCard(card);
+		moveMsg.setShiftCard(shiftCard);
 		moveMsg.setShiftPosition(cardPos);
 
 		mazeCom.setMoveMessage(moveMsg);
