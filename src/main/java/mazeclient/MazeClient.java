@@ -1,6 +1,8 @@
 package mazeclient;
 
 import mazeclient.generated.*;
+import mazeclient.generated.CardType.Openings;
+import mazeclient.generated.CardType.Pin;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
@@ -29,7 +31,8 @@ public class MazeClient {
 
 	private boolean doNextMove = true;
 
-	private int playerId;
+	private int playerId = -1;
+	private int moveTry = 0;
 
 	public MazeClient() {
 		objectFactory = new ObjectFactory();
@@ -82,42 +85,58 @@ public class MazeClient {
 				logger.warning("Expected AWAITMOVE, got " + msg.getMcType() + "!");
 				continue;
 			}
-
+			moveTry++;
 			// save data
 			AwaitMoveMessageType awaitMoveMsg = msg.getAwaitMoveMessage();
 			readDataHandler.handleData(awaitMoveMsg);
 
-			// do our moves, we got 3 tries
-			for (int i = 0; i < 3; i++) {
-				// send move (handler has to call move!)
-				handler.doMove();
+			// send move (handler has to call move!)
+			handler.doMove();
 
-				// check if move was ok
-				MazeCom mazeCom = read();
-				if (msg.getMcType() != MazeComType.ACCEPT) {
-					logger.warning("Expected ACCEPT, got " + mazeCom.getMcType());
-					continue;
-				}
-				AcceptMessageType acceptMessage = mazeCom.getAcceptMessage();
-				if (acceptMessage.isAccept()) {
-					// doMove was ok, we are done here
-					break;
-				} else {
-					// try another move
-					logger.warning(
-							"Got error from server (try " + (i + 1) + "/3)" + acceptMessage.getErrorCode().name() + " "
-									+ acceptMessage.getErrorCode().value());
-				}
+			// check if move was ok
+			MazeCom mazeCom = read();
+			if (mazeCom.getMcType() != MazeComType.ACCEPT) {
+				logger.warning("Expected ACCEPT, got " + mazeCom.getMcType());
+				continue;
+			}
+
+			AcceptMessageType acceptMessage = mazeCom.getAcceptMessage();
+			if (acceptMessage.isAccept()) {
+				// doMove was ok, we are done here
+				moveTry = 0;
+				break;
+			} else {
+				// try another move
+				logger.warning("Got error from server (try " + moveTry + "/3): " + acceptMessage.getErrorCode().name()
+						+ " " + acceptMessage.getErrorCode().value());
 			}
 		}
 	}
 
-	public void move(PositionType playerPos, PositionType cardPos, CardType cardType) {
+	public void move(int playerX, int playerY, int cardX, int cardY, boolean[] openings, TreasureType treasure) {
 		MazeCom mazeCom = objectFactory.createMazeCom();
 		MoveMessageType moveMsg = objectFactory.createMoveMessageType();
+		PositionType playerPos = objectFactory.createPositionType();
+		playerPos.setCol(playerX);
+		playerPos.setRow(playerY);
+		PositionType cardPos = objectFactory.createPositionType();
+		cardPos.setCol(cardX);
+		cardPos.setRow(cardY);
+		CardType card = objectFactory.createCardType();
+		Openings cardOpenings = objectFactory.createCardTypeOpenings();
+		cardOpenings.setTop(openings[0]);
+		cardOpenings.setRight(openings[1]);
+		cardOpenings.setBottom(openings[2]);
+		cardOpenings.setLeft(openings[3]);
+		card.setOpenings(cardOpenings);
+		Pin pin = objectFactory.createCardTypePin();
+		card.setPin(pin);
+		card.setTreasure(treasure);
+
 		moveMsg.setNewPinPos(playerPos);
-		moveMsg.setShiftCard(cardType);
+		moveMsg.setShiftCard(card);
 		moveMsg.setShiftPosition(cardPos);
+
 		mazeCom.setMoveMessage(moveMsg);
 		mazeCom.setMcType(MazeComType.MOVE);
 		send(mazeCom);
@@ -156,12 +175,22 @@ public class MazeClient {
 		return sw.toString();
 	}
 
-	@FunctionalInterface interface MoveHandler {
+	public int getPlayerId() {
+		return playerId;
+	}
+
+	public int getMoveTry() {
+		return moveTry;
+	}
+
+	@FunctionalInterface
+	interface MoveHandler {
 
 		void doMove();
 	}
 
-	@FunctionalInterface interface ReadDataHandler {
+	@FunctionalInterface
+	interface ReadDataHandler {
 
 		void handleData(AwaitMoveMessageType data);
 	}

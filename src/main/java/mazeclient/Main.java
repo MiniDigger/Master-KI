@@ -2,6 +2,9 @@ package mazeclient;
 
 import java.util.logging.Logger;
 
+import mazeclient.generated.TreasureType;
+import mazeclient.generated.TreasuresToGoType;
+
 /**
  * Created by mbenndorf on 20.06.2017.
  */
@@ -24,10 +27,10 @@ public class Main {
 		}
 
 		mazeClient.listen(() -> {
-			//TODO do KI here
-			mazeClient.move();
+			// TODO do KI here
+			mazeClient.move(0, 0, 0, 0, new boolean[4], TreasureType.SYM_01);
 		}, (data -> {
-			//TODO do stuff with data here
+			// TODO do stuff with data here
 		}));
 	}
 }
