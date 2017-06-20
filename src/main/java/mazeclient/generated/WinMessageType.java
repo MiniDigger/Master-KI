@@ -8,7 +8,7 @@
 
 package mazeclient.generated;
 
-import de.fhac.mazenet.server.generated.BoardType;
+import mazeclient.generated.BoardType;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;

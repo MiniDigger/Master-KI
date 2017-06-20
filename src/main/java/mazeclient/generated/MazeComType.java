@@ -48,7 +48,7 @@ public enum MazeComType {
         return name();
     }
 
-    public static de.fhac.mazenet.server.generated.MazeComType fromValue(String v) {
+    public static mazeclient.generated.MazeComType fromValue(String v) {
         return valueOf(v);
     }
 

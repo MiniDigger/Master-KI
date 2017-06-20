@@ -8,7 +8,7 @@
 
 package mazeclient.generated;
 
-import de.fhac.mazenet.server.generated.ErrorType;
+import mazeclient.generated.ErrorType;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;

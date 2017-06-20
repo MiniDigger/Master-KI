@@ -8,10 +8,10 @@
 
 package mazeclient.generated;
 
-import de.fhac.mazenet.server.generated.CardType;
-import de.fhac.mazenet.server.generated.DisconnectMessageType;
-import de.fhac.mazenet.server.generated.LoginMessageType;
-import de.fhac.mazenet.server.generated.MoveMessageType;
+import mazeclient.generated.CardType;
+import mazeclient.generated.DisconnectMessageType;
+import mazeclient.generated.LoginMessageType;
+import mazeclient.generated.MoveMessageType;
 
 import javax.xml.bind.annotation.XmlRegistry;
 
@@ -74,10 +74,10 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link de.fhac.mazenet.server.generated.LoginMessageType }
+     * Create an instance of {@link mazeclient.generated.LoginMessageType }
      *
      */
-    public de.fhac.mazenet.server.generated.LoginMessageType createLoginMessageType() {
+    public mazeclient.generated.LoginMessageType createLoginMessageType() {
         return new LoginMessageType();
     }
 

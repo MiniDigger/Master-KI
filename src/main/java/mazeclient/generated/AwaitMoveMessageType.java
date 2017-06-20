@@ -8,9 +8,9 @@
 
 package mazeclient.generated;
 
-import de.fhac.mazenet.server.generated.BoardType;
-import de.fhac.mazenet.server.generated.TreasureType;
-import de.fhac.mazenet.server.generated.TreasuresToGoType;
+import mazeclient.generated.BoardType;
+import mazeclient.generated.TreasureType;
+import mazeclient.generated.TreasuresToGoType;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -53,7 +53,7 @@ import javax.xml.bind.annotation.XmlType;
 public class AwaitMoveMessageType {
 
     @XmlElement(required = true)
-    protected de.fhac.mazenet.server.generated.BoardType board;
+    protected mazeclient.generated.BoardType board;
     @XmlElement(required = true)
     protected List<TreasuresToGoType> treasuresToGo;
     @XmlSchemaType(name = "string")
@@ -67,10 +67,10 @@ public class AwaitMoveMessageType {
      *
      * @return
      *     possible object is
-     *     {@link de.fhac.mazenet.server.generated.BoardType }
+     *     {@link mazeclient.generated.BoardType }
      *
      */
-    public de.fhac.mazenet.server.generated.BoardType getBoard() {
+    public mazeclient.generated.BoardType getBoard() {
         return board;
     }
 
@@ -79,7 +79,7 @@ public class AwaitMoveMessageType {
      *
      * @param value
      *     allowed object is
-     *     {@link de.fhac.mazenet.server.generated.BoardType }
+     *     {@link mazeclient.generated.BoardType }
      *
      */
     public void setBoard(BoardType value) {

@@ -8,7 +8,7 @@
 
 package mazeclient.generated;
 
-import de.fhac.mazenet.server.generated.CardType;
+import mazeclient.generated.CardType;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -48,7 +48,7 @@ public class MoveMessageType {
     @XmlElement(required = true)
     protected PositionType newPinPos;
     @XmlElement(required = true)
-    protected de.fhac.mazenet.server.generated.CardType shiftCard;
+    protected mazeclient.generated.CardType shiftCard;
 
     /**
      * Ruft den Wert der shiftPosition-Eigenschaft ab.
@@ -103,10 +103,10 @@ public class MoveMessageType {
      *
      * @return
      *     possible object is
-     *     {@link de.fhac.mazenet.server.generated.CardType }
+     *     {@link mazeclient.generated.CardType }
      *
      */
-    public de.fhac.mazenet.server.generated.CardType getShiftCard() {
+    public mazeclient.generated.CardType getShiftCard() {
         return shiftCard;
     }
 
@@ -115,7 +115,7 @@ public class MoveMessageType {
      *
      * @param value
      *     allowed object is
-     *     {@link de.fhac.mazenet.server.generated.CardType }
+     *     {@link mazeclient.generated.CardType }
      *
      */
     public void setShiftCard(CardType value) {

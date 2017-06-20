@@ -8,8 +8,8 @@
 
 package mazeclient.generated;
 
-import de.fhac.mazenet.server.generated.CardType;
-import de.fhac.mazenet.server.generated.PositionType;
+import mazeclient.generated.CardType;
+import mazeclient.generated.PositionType;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -64,7 +64,7 @@ public class BoardType {
     protected List<Row> row;
     @XmlElement(required = true)
     protected CardType shiftCard;
-    protected de.fhac.mazenet.server.generated.PositionType forbidden;
+    protected mazeclient.generated.PositionType forbidden;
 
     /**
      * Gets the value of the row property.
@@ -124,10 +124,10 @@ public class BoardType {
      *
      * @return
      *     possible object is
-     *     {@link de.fhac.mazenet.server.generated.PositionType }
+     *     {@link mazeclient.generated.PositionType }
      *
      */
-    public de.fhac.mazenet.server.generated.PositionType getForbidden() {
+    public mazeclient.generated.PositionType getForbidden() {
         return forbidden;
     }
 
@@ -136,7 +136,7 @@ public class BoardType {
      *
      * @param value
      *     allowed object is
-     *     {@link de.fhac.mazenet.server.generated.PositionType }
+     *     {@link mazeclient.generated.PositionType }
      *
      */
     public void setForbidden(PositionType value) {

@@ -8,12 +8,12 @@
 
 package mazeclient.generated;
 
-import de.fhac.mazenet.server.generated.AcceptMessageType;
-import de.fhac.mazenet.server.generated.DisconnectMessageType;
-import de.fhac.mazenet.server.generated.LoginMessageType;
-import de.fhac.mazenet.server.generated.LoginReplyMessageType;
-import de.fhac.mazenet.server.generated.MoveMessageType;
-import de.fhac.mazenet.server.generated.WinMessageType;
+import mazeclient.generated.AcceptMessageType;
+import mazeclient.generated.DisconnectMessageType;
+import mazeclient.generated.LoginMessageType;
+import mazeclient.generated.LoginReplyMessageType;
+import mazeclient.generated.MoveMessageType;
+import mazeclient.generated.WinMessageType;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -64,7 +64,7 @@ import javax.xml.bind.annotation.XmlType;
 public class MazeCom {
 
     @XmlElement(name = "LoginMessage")
-    protected de.fhac.mazenet.server.generated.LoginMessageType loginMessage;
+    protected mazeclient.generated.LoginMessageType loginMessage;
     @XmlElement(name = "LoginReplyMessage")
     protected LoginReplyMessageType loginReplyMessage;
     @XmlElement(name = "AwaitMoveMessage")
@@ -87,10 +87,10 @@ public class MazeCom {
      *
      * @return
      *     possible object is
-     *     {@link de.fhac.mazenet.server.generated.LoginMessageType }
+     *     {@link mazeclient.generated.LoginMessageType }
      *
      */
-    public de.fhac.mazenet.server.generated.LoginMessageType getLoginMessage() {
+    public mazeclient.generated.LoginMessageType getLoginMessage() {
         return loginMessage;
     }
 
@@ -99,7 +99,7 @@ public class MazeCom {
      *
      * @param value
      *     allowed object is
-     *     {@link de.fhac.mazenet.server.generated.LoginMessageType }
+     *     {@link mazeclient.generated.LoginMessageType }
      *
      */
     public void setLoginMessage(LoginMessageType value) {

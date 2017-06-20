@@ -48,7 +48,7 @@ public enum ErrorType {
         return name();
     }
 
-    public static de.fhac.mazenet.server.generated.ErrorType fromValue(String v) {
+    public static mazeclient.generated.ErrorType fromValue(String v) {
         return valueOf(v);
     }
 

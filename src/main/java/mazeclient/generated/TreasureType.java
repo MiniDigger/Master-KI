@@ -125,8 +125,8 @@ public enum TreasureType {
         return value;
     }
 
-    public static de.fhac.mazenet.server.generated.TreasureType fromValue(String v) {
-        for (de.fhac.mazenet.server.generated.TreasureType c: de.fhac.mazenet.server.generated.TreasureType.values()) {
+    public static mazeclient.generated.TreasureType fromValue(String v) {
+        for (mazeclient.generated.TreasureType c: mazeclient.generated.TreasureType.values()) {
             if (c.value.equals(v)) {
                 return c;
             }

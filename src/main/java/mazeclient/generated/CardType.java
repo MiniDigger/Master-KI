@@ -8,7 +8,7 @@
 
 package mazeclient.generated;
 
-import de.fhac.mazenet.server.generated.TreasureType;
+import mazeclient.generated.TreasureType;
 
 import java.util.ArrayList;
 import java.util.List;
