@@ -150,11 +150,11 @@ public class MazeClient {
 		MazeCom mazeCom = objectFactory.createMazeCom();
 		MoveMessageType moveMsg = objectFactory.createMoveMessageType();
 		PositionType playerPos = objectFactory.createPositionType();
-		playerPos.setCol(playerX);
-		playerPos.setRow(playerY);
+		playerPos.setCol(playerY);
+		playerPos.setRow(playerX);
 		PositionType cardPos = objectFactory.createPositionType();
-		cardPos.setCol(cardX);
-		cardPos.setRow(cardY);
+		cardPos.setCol(cardY);
+		cardPos.setRow(cardX);
 
 		moveMsg.setNewPinPos(playerPos);
 		moveMsg.setShiftCard(shiftCard);
