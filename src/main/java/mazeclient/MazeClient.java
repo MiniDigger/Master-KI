@@ -8,6 +8,7 @@ import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
+import java.io.IOException;
 import java.io.StringReader;
 import java.io.StringWriter;
 import java.net.Socket;
@@ -28,6 +29,15 @@ public class MazeClient {
 	private JAXBContext jaxbContext;
 	private Marshaller marshaller;
 	private Unmarshaller unmarshaller;
+
+	private ErrorHandler errorHandler = (msg, expected) -> {
+	};
+	private WinHandler winHandler = (msg) -> {
+	};
+	private MoveHandler moveHandler = () -> {
+	};
+	private ReadDataHandler readDataHandler = (data) -> {
+	};
 
 	private boolean doNextMove = true;
 
@@ -57,6 +67,27 @@ public class MazeClient {
 		}
 	}
 
+	public void disconnect() {
+		if (inputStream != null) {
+			try {
+				inputStream.close();
+			} catch (IOException ignored) {
+			}
+		}
+		if (outputStream != null) {
+			try {
+				outputStream.close();
+			} catch (IOException ignored) {
+			}
+		}
+		if (socket != null) {
+			try {
+				socket.close();
+			} catch (IOException ignored) {
+			}
+		}
+	}
+
 	public boolean handshake(String name) {
 		// send login msg
 		LoginMessageType loginMessageType = objectFactory.createLoginMessageType();
@@ -68,7 +99,7 @@ public class MazeClient {
 		// read login reply msg
 		mazeCom = read();
 		if (mazeCom.getMcType() != MazeComType.LOGINREPLY) {
-			logger.warning("Expected LOGINREPLY, got " + mazeCom.getMcType() + "!");
+			errorHandler.handle(mazeCom, MazeComType.LOGINREPLY);
 			return false;
 		}
 		LoginReplyMessageType reply = mazeCom.getLoginReplyMessage();
@@ -77,12 +108,15 @@ public class MazeClient {
 		return true;
 	}
 
-	public void listen(MoveHandler handler, ReadDataHandler readDataHandler) {
+	public void listen() {
 		while (doNextMove) {
 			// read packet
 			MazeCom msg = read();
+			if (msg.getMcType() == MazeComType.WIN) {
+				winHandler.handle(msg.getWinMessage());
+			}
 			if (msg.getMcType() != MazeComType.AWAITMOVE) {
-				logger.warning("Expected AWAITMOVE, got " + msg.getMcType() + "!");
+				errorHandler.handle(msg, MazeComType.AWAITMOVE);
 				continue;
 			}
 			moveTry++;
@@ -91,12 +125,12 @@ public class MazeClient {
 			readDataHandler.handleData(awaitMoveMsg);
 
 			// send move (handler has to call move!)
-			handler.doMove();
+			moveHandler.doMove();
 
 			// check if move was ok
 			MazeCom mazeCom = read();
 			if (mazeCom.getMcType() != MazeComType.ACCEPT) {
-				logger.warning("Expected ACCEPT, got " + mazeCom.getMcType());
+				errorHandler.handle(msg, MazeComType.ACCEPT);
 				continue;
 			}
 
@@ -107,8 +141,9 @@ public class MazeClient {
 				break;
 			} else {
 				// try another move
-				logger.warning("Got error from server (try " + moveTry + "/3): " + acceptMessage.getErrorCode().name()
-						+ " " + acceptMessage.getErrorCode().value());
+				logger.warning(
+						"move was not accepted by server (try " + moveTry + "/3): " + acceptMessage.getErrorCode()
+								.name() + " " + acceptMessage.getErrorCode().value());
 			}
 		}
 	}
@@ -175,6 +210,22 @@ public class MazeClient {
 		return sw.toString();
 	}
 
+	public void setMoveHandler(MoveHandler moveHandler) {
+		this.moveHandler = moveHandler;
+	}
+
+	public void setReadDataHandler(ReadDataHandler readDataHandler) {
+		this.readDataHandler = readDataHandler;
+	}
+
+	public void setWinHandler(WinHandler winHandler) {
+		this.winHandler = winHandler;
+	}
+
+	public void setErrorHandler(ErrorHandler errorHandler) {
+		this.errorHandler = errorHandler;
+	}
+
 	public int getPlayerId() {
 		return playerId;
 	}
@@ -183,15 +234,21 @@ public class MazeClient {
 		return moveTry;
 	}
 
-	@FunctionalInterface
-	interface MoveHandler {
+	@FunctionalInterface interface MoveHandler {
 
 		void doMove();
 	}
 
-	@FunctionalInterface
-	interface ReadDataHandler {
+	@FunctionalInterface interface ReadDataHandler {
 
 		void handleData(AwaitMoveMessageType data);
+	}
+
+	@FunctionalInterface interface ErrorHandler {
+		void handle(MazeCom msg, MazeComType expected);
+	}
+
+	@FunctionalInterface interface WinHandler {
+		void handle(WinMessageType msg);
 	}
 }
