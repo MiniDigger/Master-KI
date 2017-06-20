@@ -112,10 +112,12 @@ public class MazeClient {
 		}
 	}
 
-	public void move() {
+	public void move(PositionType playerPos, PositionType cardPos, CardType cardType) {
 		MazeCom mazeCom = objectFactory.createMazeCom();
 		MoveMessageType moveMsg = objectFactory.createMoveMessageType();
-		//TODO move msg
+		moveMsg.setNewPinPos(playerPos);
+		moveMsg.setShiftCard(cardType);
+		moveMsg.setShiftPosition(cardPos);
 		mazeCom.setMoveMessage(moveMsg);
 		mazeCom.setMcType(MazeComType.MOVE);
 		send(mazeCom);
