@@ -59,8 +59,8 @@ public class Main {
 
 	private static void readMoveFromCmd(MazeClient mazeClient) {
 		logger.info("Please input move...");
-		String[] args = scanner.next().split(";");
-		mazeClient.move(Integer.parseInt(args[0]), Integer.parseInt(args[1]), Integer.parseInt(args[2]),
-				Integer.parseInt(args[3]), shiftCard);
+		String[] args = scanner.next().split(",");
+		mazeClient.move(Integer.parseInt(args[2]), Integer.parseInt(args[3]), Integer.parseInt(args[0]),
+				Integer.parseInt(args[1]), shiftCard);
 	}
 }

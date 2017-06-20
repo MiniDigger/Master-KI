@@ -38,6 +38,8 @@ public class MazeClient {
 	};
 
 	private boolean doNextMove = true;
+	private boolean displayReceivedXml = false;
+	private boolean displaySendXml = true;
 
 	private int playerId = -1;
 	private int moveTry = 0;
@@ -136,9 +138,7 @@ public class MazeClient {
 			if (acceptMessage.isAccept()) {
 				// doMove was ok, we are done here
 				moveTry = 0;
-				break;
 			} else {
-				// try another move
 				logger.warning(
 						"move was not accepted by server (try " + moveTry + "/3): " + acceptMessage.getErrorCode()
 								.name() + " " + acceptMessage.getErrorCode().value());
@@ -168,7 +168,8 @@ public class MazeClient {
 	private void send(MazeCom msg) {
 		try {
 			String xml = messageToXMLString(msg);
-			logger.info("Sending: " + xml);
+			if (displaySendXml)
+				logger.info("Sending: " + xml);
 			outputStream.writeUTF8(xml);
 		} catch (Exception e) {
 			logger.log(Level.SEVERE, "Error while sending msg", e);
@@ -179,7 +180,8 @@ public class MazeClient {
 		MazeCom msg = null;
 		try {
 			String xml = inputStream.readUTF8();
-			logger.info("Reading: " + xml);
+			if (displayReceivedXml)
+				logger.info("Reading: " + xml);
 			msg = xmlStringToMessage(xml);
 		} catch (Exception e) {
 			logger.log(Level.SEVERE, "Error while reading msg", e);
