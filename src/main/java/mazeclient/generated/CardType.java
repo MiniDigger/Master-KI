@@ -8,22 +8,16 @@
 
 package mazeclient.generated;
 
-import mazeclient.generated.TreasureType;
-
+import javax.xml.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlSchemaType;
-import javax.xml.bind.annotation.XmlType;
 
 
 /**
  * <p>Java-Klasse für cardType complex type.
- * 
+ * <p>
  * <p>Das folgende Schemafragment gibt den erwarteten Content an, der in dieser Klasse enthalten ist.
- * 
+ * <p>
  * <pre>
  * &lt;complexType name="cardType">
  *   &lt;complexContent>
@@ -60,14 +54,12 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "cardType", propOrder = {
-    "openings",
-    "pin",
-    "treasure"
+        "openings",
+        "pin",
+        "treasure"
 })
 public class CardType {
 
@@ -80,11 +72,9 @@ public class CardType {
 
     /**
      * Ruft den Wert der openings-Eigenschaft ab.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Openings }
-     *     
+     *
+     * @return possible object is
+     * {@link Openings }
      */
     public Openings getOpenings() {
         return openings;
@@ -92,11 +82,9 @@ public class CardType {
 
     /**
      * Legt den Wert der openings-Eigenschaft fest.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Openings }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Openings }
      */
     public void setOpenings(Openings value) {
         this.openings = value;
@@ -104,11 +92,9 @@ public class CardType {
 
     /**
      * Ruft den Wert der pin-Eigenschaft ab.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Pin }
-     *     
+     *
+     * @return possible object is
+     * {@link Pin }
      */
     public Pin getPin() {
         return pin;
@@ -116,11 +102,9 @@ public class CardType {
 
     /**
      * Legt den Wert der pin-Eigenschaft fest.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Pin }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Pin }
      */
     public void setPin(Pin value) {
         this.pin = value;
@@ -128,11 +112,9 @@ public class CardType {
 
     /**
      * Ruft den Wert der treasure-Eigenschaft ab.
-     * 
-     * @return
-     *     possible object is
-     *     {@link TreasureType }
-     *     
+     *
+     * @return possible object is
+     * {@link TreasureType }
      */
     public TreasureType getTreasure() {
         return treasure;
@@ -140,11 +122,9 @@ public class CardType {
 
     /**
      * Legt den Wert der treasure-Eigenschaft fest.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link TreasureType }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link TreasureType }
      */
     public void setTreasure(TreasureType value) {
         this.treasure = value;
@@ -153,9 +133,9 @@ public class CardType {
 
     /**
      * <p>Java-Klasse für anonymous complex type.
-     * 
+     * <p>
      * <p>Das folgende Schemafragment gibt den erwarteten Content an, der in dieser Klasse enthalten ist.
-     * 
+     * <p>
      * <pre>
      * &lt;complexType>
      *   &lt;complexContent>
@@ -170,15 +150,13 @@ public class CardType {
      *   &lt;/complexContent>
      * &lt;/complexType>
      * </pre>
-     * 
-     * 
      */
     @XmlAccessorType(XmlAccessType.FIELD)
     @XmlType(name = "", propOrder = {
-        "top",
-        "bottom",
-        "left",
-        "right"
+            "top",
+            "bottom",
+            "left",
+            "right"
     })
     public static class Openings {
 
@@ -189,7 +167,6 @@ public class CardType {
 
         /**
          * Ruft den Wert der top-Eigenschaft ab.
-         * 
          */
         public boolean isTop() {
             return top;
@@ -197,7 +174,6 @@ public class CardType {
 
         /**
          * Legt den Wert der top-Eigenschaft fest.
-         * 
          */
         public void setTop(boolean value) {
             this.top = value;
@@ -205,7 +181,6 @@ public class CardType {
 
         /**
          * Ruft den Wert der bottom-Eigenschaft ab.
-         * 
          */
         public boolean isBottom() {
             return bottom;
@@ -213,7 +188,6 @@ public class CardType {
 
         /**
          * Legt den Wert der bottom-Eigenschaft fest.
-         * 
          */
         public void setBottom(boolean value) {
             this.bottom = value;
@@ -221,7 +195,6 @@ public class CardType {
 
         /**
          * Ruft den Wert der left-Eigenschaft ab.
-         * 
          */
         public boolean isLeft() {
             return left;
@@ -229,7 +202,6 @@ public class CardType {
 
         /**
          * Legt den Wert der left-Eigenschaft fest.
-         * 
          */
         public void setLeft(boolean value) {
             this.left = value;
@@ -237,7 +209,6 @@ public class CardType {
 
         /**
          * Ruft den Wert der right-Eigenschaft ab.
-         * 
          */
         public boolean isRight() {
             return right;
@@ -245,7 +216,6 @@ public class CardType {
 
         /**
          * Legt den Wert der right-Eigenschaft fest.
-         * 
          */
         public void setRight(boolean value) {
             this.right = value;
@@ -256,9 +226,9 @@ public class CardType {
 
     /**
      * <p>Java-Klasse für anonymous complex type.
-     * 
+     * <p>
      * <p>Das folgende Schemafragment gibt den erwarteten Content an, der in dieser Klasse enthalten ist.
-     * 
+     * <p>
      * <pre>
      * &lt;complexType>
      *   &lt;complexContent>
@@ -270,12 +240,10 @@ public class CardType {
      *   &lt;/complexContent>
      * &lt;/complexType>
      * </pre>
-     * 
-     * 
      */
     @XmlAccessorType(XmlAccessType.FIELD)
     @XmlType(name = "", propOrder = {
-        "playerID"
+            "playerID"
     })
     public static class Pin {
 
@@ -284,25 +252,23 @@ public class CardType {
 
         /**
          * Gets the value of the playerID property.
-         * 
+         * <p>
          * <p>
          * This accessor method returns a reference to the live list,
          * not a snapshot. Therefore any modification you make to the
          * returned list will be present inside the JAXB object.
          * This is why there is not a <CODE>set</CODE> method for the playerID property.
-         * 
+         * <p>
          * <p>
          * For example, to add a new item, do as follows:
          * <pre>
          *    getPlayerID().add(newItem);
          * </pre>
-         * 
-         * 
+         * <p>
+         * <p>
          * <p>
          * Objects of the following type(s) are allowed in the list
          * {@link Integer }
-         * 
-         * 
          */
         public List<Integer> getPlayerID() {
             if (playerID == null) {

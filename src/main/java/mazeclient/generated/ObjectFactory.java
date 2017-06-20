@@ -8,27 +8,21 @@
 
 package mazeclient.generated;
 
-import mazeclient.generated.CardType;
-import mazeclient.generated.DisconnectMessageType;
-import mazeclient.generated.LoginMessageType;
-import mazeclient.generated.MoveMessageType;
-
 import javax.xml.bind.annotation.XmlRegistry;
 
 
 /**
- * This object contains factory methods for each 
- * Java content interface and Java element interface 
- * generated in the generated package. 
- * <p>An ObjectFactory allows you to programatically 
- * construct new instances of the Java representation 
- * for XML content. The Java representation of XML 
- * content can consist of schema derived interfaces 
- * and classes representing the binding of schema 
- * type definitions, element declarations and model 
- * groups.  Factory methods for each of these are 
+ * This object contains factory methods for each
+ * Java content interface and Java element interface
+ * generated in the generated package.
+ * <p>An ObjectFactory allows you to programatically
+ * construct new instances of the Java representation
+ * for XML content. The Java representation of XML
+ * content can consist of schema derived interfaces
+ * and classes representing the binding of schema
+ * type definitions, element declarations and model
+ * groups.  Factory methods for each of these are
  * provided in this class.
- * 
  */
 @XmlRegistry
 public class ObjectFactory {
@@ -36,14 +30,12 @@ public class ObjectFactory {
 
     /**
      * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: generated
-     * 
      */
     public ObjectFactory() {
     }
 
     /**
      * Create an instance of {@link CardType }
-     *
      */
     public CardType createCardType() {
         return new CardType();
@@ -51,7 +43,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link BoardType }
-     *
      */
     public BoardType createBoardType() {
         return new BoardType();
@@ -59,7 +50,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link WinMessageType }
-     *
      */
     public WinMessageType createWinMessageType() {
         return new WinMessageType();
@@ -67,7 +57,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link MazeCom }
-     *
      */
     public MazeCom createMazeCom() {
         return new MazeCom();
@@ -75,7 +64,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link mazeclient.generated.LoginMessageType }
-     *
      */
     public mazeclient.generated.LoginMessageType createLoginMessageType() {
         return new LoginMessageType();
@@ -83,7 +71,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link LoginReplyMessageType }
-     *
      */
     public LoginReplyMessageType createLoginReplyMessageType() {
         return new LoginReplyMessageType();
@@ -91,7 +78,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link AwaitMoveMessageType }
-     *
      */
     public AwaitMoveMessageType createAwaitMoveMessageType() {
         return new AwaitMoveMessageType();
@@ -99,7 +85,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link MoveMessageType }
-     *
      */
     public MoveMessageType createMoveMessageType() {
         return new MoveMessageType();
@@ -107,7 +92,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link AcceptMessageType }
-     *
      */
     public AcceptMessageType createAcceptMessageType() {
         return new AcceptMessageType();
@@ -115,7 +99,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link DisconnectMessageType }
-     *
      */
     public DisconnectMessageType createDisconnectMessageType() {
         return new DisconnectMessageType();
@@ -123,7 +106,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link PositionType }
-     *
      */
     public PositionType createPositionType() {
         return new PositionType();
@@ -131,7 +113,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link TreasuresToGoType }
-     *
      */
     public TreasuresToGoType createTreasuresToGoType() {
         return new TreasuresToGoType();
@@ -139,7 +120,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link CardType.Openings }
-     *
      */
     public CardType.Openings createCardTypeOpenings() {
         return new CardType.Openings();
@@ -147,7 +127,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link CardType.Pin }
-     *
      */
     public CardType.Pin createCardTypePin() {
         return new CardType.Pin();
@@ -155,7 +134,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link BoardType.Row }
-     * 
      */
     public BoardType.Row createBoardTypeRow() {
         return new BoardType.Row();
@@ -163,7 +141,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link WinMessageType.Winner }
-     * 
      */
     public WinMessageType.Winner createWinMessageTypeWinner() {
         return new WinMessageType.Winner();

@@ -8,8 +8,6 @@
 
 package mazeclient.generated;
 
-import mazeclient.generated.CardType;
-
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
@@ -18,9 +16,9 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * <p>Java-Klasse für MoveMessageType complex type.
- * 
+ * <p>
  * <p>Das folgende Schemafragment gibt den erwarteten Content an, der in dieser Klasse enthalten ist.
- * 
+ * <p>
  * <pre>
  * &lt;complexType name="MoveMessageType">
  *   &lt;complexContent>
@@ -34,8 +32,6 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "MoveMessageType", propOrder = {
@@ -53,10 +49,8 @@ public class MoveMessageType {
     /**
      * Ruft den Wert der shiftPosition-Eigenschaft ab.
      *
-     * @return
-     *     possible object is
-     *     {@link PositionType }
-     *
+     * @return possible object is
+     * {@link PositionType }
      */
     public PositionType getShiftPosition() {
         return shiftPosition;
@@ -65,10 +59,8 @@ public class MoveMessageType {
     /**
      * Legt den Wert der shiftPosition-Eigenschaft fest.
      *
-     * @param value
-     *     allowed object is
-     *     {@link PositionType }
-     *
+     * @param value allowed object is
+     *              {@link PositionType }
      */
     public void setShiftPosition(PositionType value) {
         this.shiftPosition = value;
@@ -77,10 +69,8 @@ public class MoveMessageType {
     /**
      * Ruft den Wert der newPinPos-Eigenschaft ab.
      *
-     * @return
-     *     possible object is
-     *     {@link PositionType }
-     *
+     * @return possible object is
+     * {@link PositionType }
      */
     public PositionType getNewPinPos() {
         return newPinPos;
@@ -89,10 +79,8 @@ public class MoveMessageType {
     /**
      * Legt den Wert der newPinPos-Eigenschaft fest.
      *
-     * @param value
-     *     allowed object is
-     *     {@link PositionType }
-     *
+     * @param value allowed object is
+     *              {@link PositionType }
      */
     public void setNewPinPos(PositionType value) {
         this.newPinPos = value;
@@ -101,10 +89,8 @@ public class MoveMessageType {
     /**
      * Ruft den Wert der shiftCard-Eigenschaft ab.
      *
-     * @return
-     *     possible object is
-     *     {@link mazeclient.generated.CardType }
-     *
+     * @return possible object is
+     * {@link mazeclient.generated.CardType }
      */
     public mazeclient.generated.CardType getShiftCard() {
         return shiftCard;
@@ -113,10 +99,8 @@ public class MoveMessageType {
     /**
      * Legt den Wert der shiftCard-Eigenschaft fest.
      *
-     * @param value
-     *     allowed object is
-     *     {@link mazeclient.generated.CardType }
-     *
+     * @param value allowed object is
+     *              {@link mazeclient.generated.CardType }
      */
     public void setShiftCard(CardType value) {
         this.shiftCard = value;

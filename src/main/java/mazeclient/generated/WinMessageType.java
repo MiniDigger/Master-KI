@@ -8,21 +8,14 @@
 
 package mazeclient.generated;
 
-import mazeclient.generated.BoardType;
-
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlType;
-import javax.xml.bind.annotation.XmlValue;
+import javax.xml.bind.annotation.*;
 
 
 /**
  * <p>Java-Klasse für WinMessageType complex type.
- * 
+ * <p>
  * <p>Das folgende Schemafragment gibt den erwarteten Content an, der in dieser Klasse enthalten ist.
- * 
+ * <p>
  * <pre>
  * &lt;complexType name="WinMessageType">
  *   &lt;complexContent>
@@ -43,13 +36,11 @@ import javax.xml.bind.annotation.XmlValue;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "WinMessageType", propOrder = {
-    "board",
-    "winner"
+        "board",
+        "winner"
 })
 public class WinMessageType {
 
@@ -60,11 +51,9 @@ public class WinMessageType {
 
     /**
      * Ruft den Wert der board-Eigenschaft ab.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BoardType }
-     *     
+     *
+     * @return possible object is
+     * {@link BoardType }
      */
     public BoardType getBoard() {
         return board;
@@ -72,11 +61,9 @@ public class WinMessageType {
 
     /**
      * Legt den Wert der board-Eigenschaft fest.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BoardType }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BoardType }
      */
     public void setBoard(BoardType value) {
         this.board = value;
@@ -84,11 +71,9 @@ public class WinMessageType {
 
     /**
      * Ruft den Wert der winner-Eigenschaft ab.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Winner }
-     *     
+     *
+     * @return possible object is
+     * {@link Winner }
      */
     public Winner getWinner() {
         return winner;
@@ -96,11 +81,9 @@ public class WinMessageType {
 
     /**
      * Legt den Wert der winner-Eigenschaft fest.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Winner }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Winner }
      */
     public void setWinner(Winner value) {
         this.winner = value;
@@ -109,9 +92,9 @@ public class WinMessageType {
 
     /**
      * <p>Java-Klasse für anonymous complex type.
-     * 
+     * <p>
      * <p>Das folgende Schemafragment gibt den erwarteten Content an, der in dieser Klasse enthalten ist.
-     * 
+     * <p>
      * <pre>
      * &lt;complexType>
      *   &lt;simpleContent>
@@ -121,12 +104,10 @@ public class WinMessageType {
      *   &lt;/simpleContent>
      * &lt;/complexType>
      * </pre>
-     * 
-     * 
      */
     @XmlAccessorType(XmlAccessType.FIELD)
     @XmlType(name = "", propOrder = {
-        "value"
+            "value"
     })
     public static class Winner {
 
@@ -137,11 +118,9 @@ public class WinMessageType {
 
         /**
          * Ruft den Wert der value-Eigenschaft ab.
-         * 
-         * @return
-         *     possible object is
-         *     {@link String }
-         *     
+         *
+         * @return possible object is
+         * {@link String }
          */
         public String getValue() {
             return value;
@@ -149,11 +128,9 @@ public class WinMessageType {
 
         /**
          * Legt den Wert der value-Eigenschaft fest.
-         * 
-         * @param value
-         *     allowed object is
-         *     {@link String }
-         *     
+         *
+         * @param value allowed object is
+         *              {@link String }
          */
         public void setValue(String value) {
             this.value = value;
@@ -161,7 +138,6 @@ public class WinMessageType {
 
         /**
          * Ruft den Wert der id-Eigenschaft ab.
-         * 
          */
         public int getId() {
             return id;
@@ -169,7 +145,6 @@ public class WinMessageType {
 
         /**
          * Legt den Wert der id-Eigenschaft fest.
-         * 
          */
         public void setId(int value) {
             this.id = value;

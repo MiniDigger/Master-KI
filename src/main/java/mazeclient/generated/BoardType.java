@@ -8,23 +8,16 @@
 
 package mazeclient.generated;
 
-import mazeclient.generated.CardType;
-import mazeclient.generated.PositionType;
-
+import javax.xml.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlType;
 
 
 /**
  * <p>Java-Klasse für boardType complex type.
- * 
+ * <p>
  * <p>Das folgende Schemafragment gibt den erwarteten Content an, der in dieser Klasse enthalten ist.
- * 
+ * <p>
  * <pre>
  * &lt;complexType name="boardType">
  *   &lt;complexContent>
@@ -49,14 +42,12 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "boardType", propOrder = {
-    "row",
-    "shiftCard",
-    "forbidden"
+        "row",
+        "shiftCard",
+        "forbidden"
 })
 public class BoardType {
 
@@ -68,25 +59,23 @@ public class BoardType {
 
     /**
      * Gets the value of the row property.
-     *
+     * <p>
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
      * This is why there is not a <CODE>set</CODE> method for the row property.
-     *
+     * <p>
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
      *    getRow().add(newItem);
      * </pre>
-     *
-     *
+     * <p>
+     * <p>
      * <p>
      * Objects of the following type(s) are allowed in the list
      * {@link Row }
-     *
-     *
      */
     public List<Row> getRow() {
         if (row == null) {
@@ -98,10 +87,8 @@ public class BoardType {
     /**
      * Ruft den Wert der shiftCard-Eigenschaft ab.
      *
-     * @return
-     *     possible object is
-     *     {@link CardType }
-     *
+     * @return possible object is
+     * {@link CardType }
      */
     public CardType getShiftCard() {
         return shiftCard;
@@ -110,10 +97,8 @@ public class BoardType {
     /**
      * Legt den Wert der shiftCard-Eigenschaft fest.
      *
-     * @param value
-     *     allowed object is
-     *     {@link CardType }
-     *
+     * @param value allowed object is
+     *              {@link CardType }
      */
     public void setShiftCard(CardType value) {
         this.shiftCard = value;
@@ -122,10 +107,8 @@ public class BoardType {
     /**
      * Ruft den Wert der forbidden-Eigenschaft ab.
      *
-     * @return
-     *     possible object is
-     *     {@link mazeclient.generated.PositionType }
-     *
+     * @return possible object is
+     * {@link mazeclient.generated.PositionType }
      */
     public mazeclient.generated.PositionType getForbidden() {
         return forbidden;
@@ -134,10 +117,8 @@ public class BoardType {
     /**
      * Legt den Wert der forbidden-Eigenschaft fest.
      *
-     * @param value
-     *     allowed object is
-     *     {@link mazeclient.generated.PositionType }
-     *
+     * @param value allowed object is
+     *              {@link mazeclient.generated.PositionType }
      */
     public void setForbidden(PositionType value) {
         this.forbidden = value;
@@ -146,9 +127,9 @@ public class BoardType {
 
     /**
      * <p>Java-Klasse für anonymous complex type.
-     *
+     * <p>
      * <p>Das folgende Schemafragment gibt den erwarteten Content an, der in dieser Klasse enthalten ist.
-     *
+     * <p>
      * <pre>
      * &lt;complexType>
      *   &lt;complexContent>
@@ -161,12 +142,10 @@ public class BoardType {
      *   &lt;/complexContent>
      * &lt;/complexType>
      * </pre>
-     *
-     *
      */
     @XmlAccessorType(XmlAccessType.FIELD)
     @XmlType(name = "", propOrder = {
-        "col"
+            "col"
     })
     public static class Row {
 
@@ -177,25 +156,23 @@ public class BoardType {
 
         /**
          * Gets the value of the col property.
-         *
+         * <p>
          * <p>
          * This accessor method returns a reference to the live list,
          * not a snapshot. Therefore any modification you make to the
          * returned list will be present inside the JAXB object.
          * This is why there is not a <CODE>set</CODE> method for the col property.
-         *
+         * <p>
          * <p>
          * For example, to add a new item, do as follows:
          * <pre>
          *    getCol().add(newItem);
          * </pre>
-         *
-         *
+         * <p>
+         * <p>
          * <p>
          * Objects of the following type(s) are allowed in the list
          * {@link CardType }
-         *
-         *
          */
         public List<CardType> getCol() {
             if (col == null) {
@@ -206,11 +183,9 @@ public class BoardType {
 
         /**
          * Ruft den Wert der optionalAttirbute-Eigenschaft ab.
-         * 
-         * @return
-         *     possible object is
-         *     {@link String }
-         *     
+         *
+         * @return possible object is
+         * {@link String }
          */
         public String getOptionalAttirbute() {
             return optionalAttirbute;
@@ -218,11 +193,9 @@ public class BoardType {
 
         /**
          * Legt den Wert der optionalAttirbute-Eigenschaft fest.
-         * 
-         * @param value
-         *     allowed object is
-         *     {@link String }
-         *     
+         *
+         * @param value allowed object is
+         *              {@link String }
          */
         public void setOptionalAttirbute(String value) {
             this.optionalAttirbute = value;

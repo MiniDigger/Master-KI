@@ -15,9 +15,9 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * <p>Java-Klasse für positionType complex type.
- * 
+ * <p>
  * <p>Das folgende Schemafragment gibt den erwarteten Content an, der in dieser Klasse enthalten ist.
- * 
+ * <p>
  * <pre>
  * &lt;complexType name="positionType">
  *   &lt;complexContent>
@@ -30,13 +30,11 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "positionType", propOrder = {
-    "row",
-    "col"
+        "row",
+        "col"
 })
 public class PositionType {
 
@@ -45,7 +43,6 @@ public class PositionType {
 
     /**
      * Ruft den Wert der row-Eigenschaft ab.
-     * 
      */
     public int getRow() {
         return row;
@@ -53,7 +50,6 @@ public class PositionType {
 
     /**
      * Legt den Wert der row-Eigenschaft fest.
-     * 
      */
     public void setRow(int value) {
         this.row = value;
@@ -61,7 +57,6 @@ public class PositionType {
 
     /**
      * Ruft den Wert der col-Eigenschaft ab.
-     * 
      */
     public int getCol() {
         return col;
@@ -69,7 +64,6 @@ public class PositionType {
 
     /**
      * Legt den Wert der col-Eigenschaft fest.
-     * 
      */
     public void setCol(int value) {
         this.col = value;

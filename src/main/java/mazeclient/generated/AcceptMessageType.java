@@ -8,20 +8,14 @@
 
 package mazeclient.generated;
 
-import mazeclient.generated.ErrorType;
-
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlSchemaType;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
 
 
 /**
  * <p>Java-Klasse für AcceptMessageType complex type.
- * 
+ * <p>
  * <p>Das folgende Schemafragment gibt den erwarteten Content an, der in dieser Klasse enthalten ist.
- * 
+ * <p>
  * <pre>
  * &lt;complexType name="AcceptMessageType">
  *   &lt;complexContent>
@@ -34,13 +28,11 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "AcceptMessageType", propOrder = {
-    "accept",
-    "errorCode"
+        "accept",
+        "errorCode"
 })
 public class AcceptMessageType {
 
@@ -51,7 +43,6 @@ public class AcceptMessageType {
 
     /**
      * Ruft den Wert der accept-Eigenschaft ab.
-     * 
      */
     public boolean isAccept() {
         return accept;
@@ -59,7 +50,6 @@ public class AcceptMessageType {
 
     /**
      * Legt den Wert der accept-Eigenschaft fest.
-     * 
      */
     public void setAccept(boolean value) {
         this.accept = value;
@@ -67,11 +57,9 @@ public class AcceptMessageType {
 
     /**
      * Ruft den Wert der errorCode-Eigenschaft ab.
-     * 
-     * @return
-     *     possible object is
-     *     {@link ErrorType }
-     *     
+     *
+     * @return possible object is
+     * {@link ErrorType }
      */
     public ErrorType getErrorCode() {
         return errorCode;
@@ -79,11 +67,9 @@ public class AcceptMessageType {
 
     /**
      * Legt den Wert der errorCode-Eigenschaft fest.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link ErrorType }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link ErrorType }
      */
     public void setErrorCode(ErrorType value) {
         this.errorCode = value;

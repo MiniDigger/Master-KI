@@ -15,9 +15,9 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * <p>Java-Klasse für LoginReplyMessageType complex type.
- * 
+ * <p>
  * <p>Das folgende Schemafragment gibt den erwarteten Content an, der in dieser Klasse enthalten ist.
- * 
+ * <p>
  * <pre>
  * &lt;complexType name="LoginReplyMessageType">
  *   &lt;complexContent>
@@ -29,12 +29,10 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "LoginReplyMessageType", propOrder = {
-    "newID"
+        "newID"
 })
 public class LoginReplyMessageType {
 
@@ -42,7 +40,6 @@ public class LoginReplyMessageType {
 
     /**
      * Ruft den Wert der newID-Eigenschaft ab.
-     * 
      */
     public int getNewID() {
         return newID;
@@ -50,7 +47,6 @@ public class LoginReplyMessageType {
 
     /**
      * Legt den Wert der newID-Eigenschaft fest.
-     * 
      */
     public void setNewID(int value) {
         this.newID = value;

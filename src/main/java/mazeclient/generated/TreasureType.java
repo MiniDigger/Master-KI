@@ -15,7 +15,7 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * <p>Java-Klasse für treasureType.
- * 
+ * <p>
  * <p>Das folgende Schemafragment gibt den erwarteten Content an, der in dieser Klasse enthalten ist.
  * <p>
  * <pre>
@@ -52,14 +52,13 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/restriction>
  * &lt;/simpleType>
  * </pre>
- * 
  */
 @XmlType(name = "treasureType")
 @XmlEnum
 @SuppressWarnings("nls")
 public enum TreasureType {
 
-	@XmlEnumValue("Start01")
+    @XmlEnumValue("Start01")
     START_01("Start01"),
     @XmlEnumValue("Start02")
     START_02("Start02"),
@@ -126,7 +125,7 @@ public enum TreasureType {
     }
 
     public static mazeclient.generated.TreasureType fromValue(String v) {
-        for (mazeclient.generated.TreasureType c: mazeclient.generated.TreasureType.values()) {
+        for (mazeclient.generated.TreasureType c : mazeclient.generated.TreasureType.values()) {
             if (c.value.equals(v)) {
                 return c;
             }

@@ -1,22 +1,16 @@
 package mazeclient;
 
+import mazeclient.generated.*;
+
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Marshaller;
+import javax.xml.bind.Unmarshaller;
 import java.io.StringReader;
 import java.io.StringWriter;
 import java.net.Socket;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.JAXBException;
-import javax.xml.bind.Marshaller;
-import javax.xml.bind.Unmarshaller;
-
-import mazeclient.generated.AwaitMoveMessageType;
-import mazeclient.generated.LoginMessageType;
-import mazeclient.generated.LoginReplyMessageType;
-import mazeclient.generated.MazeCom;
-import mazeclient.generated.MazeComType;
-import mazeclient.generated.MoveMessageType;
-import mazeclient.generated.ObjectFactory;
 
 /**
  * Created by mbenndorf on 20.06.2017.

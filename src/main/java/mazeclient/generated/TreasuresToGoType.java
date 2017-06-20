@@ -15,9 +15,9 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * <p>Java-Klasse für TreasuresToGoType complex type.
- * 
+ * <p>
  * <p>Das folgende Schemafragment gibt den erwarteten Content an, der in dieser Klasse enthalten ist.
- * 
+ * <p>
  * <pre>
  * &lt;complexType name="TreasuresToGoType">
  *   &lt;complexContent>
@@ -30,13 +30,11 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "TreasuresToGoType", propOrder = {
-    "player",
-    "treasures"
+        "player",
+        "treasures"
 })
 public class TreasuresToGoType {
 
@@ -45,7 +43,6 @@ public class TreasuresToGoType {
 
     /**
      * Ruft den Wert der player-Eigenschaft ab.
-     * 
      */
     public int getPlayer() {
         return player;
@@ -53,7 +50,6 @@ public class TreasuresToGoType {
 
     /**
      * Legt den Wert der player-Eigenschaft fest.
-     * 
      */
     public void setPlayer(int value) {
         this.player = value;
@@ -61,7 +57,6 @@ public class TreasuresToGoType {
 
     /**
      * Ruft den Wert der treasures-Eigenschaft ab.
-     * 
      */
     public int getTreasures() {
         return treasures;
@@ -69,7 +64,6 @@ public class TreasuresToGoType {
 
     /**
      * Legt den Wert der treasures-Eigenschaft fest.
-     * 
      */
     public void setTreasures(int value) {
         this.treasures = value;

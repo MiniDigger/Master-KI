@@ -8,24 +8,16 @@
 
 package mazeclient.generated;
 
-import mazeclient.generated.BoardType;
-import mazeclient.generated.TreasureType;
-import mazeclient.generated.TreasuresToGoType;
-
+import javax.xml.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlSchemaType;
-import javax.xml.bind.annotation.XmlType;
 
 
 /**
  * <p>Java-Klasse für AwaitMoveMessageType complex type.
- * 
+ * <p>
  * <p>Das folgende Schemafragment gibt den erwarteten Content an, der in dieser Klasse enthalten ist.
- * 
+ * <p>
  * <pre>
  * &lt;complexType name="AwaitMoveMessageType">
  *   &lt;complexContent>
@@ -40,15 +32,13 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "AwaitMoveMessageType", propOrder = {
-    "board",
-    "treasuresToGo",
-    "foundTreasures",
-    "treasure"
+        "board",
+        "treasuresToGo",
+        "foundTreasures",
+        "treasure"
 })
 public class AwaitMoveMessageType {
 
@@ -65,10 +55,8 @@ public class AwaitMoveMessageType {
     /**
      * Ruft den Wert der board-Eigenschaft ab.
      *
-     * @return
-     *     possible object is
-     *     {@link mazeclient.generated.BoardType }
-     *
+     * @return possible object is
+     * {@link mazeclient.generated.BoardType }
      */
     public mazeclient.generated.BoardType getBoard() {
         return board;
@@ -77,10 +65,8 @@ public class AwaitMoveMessageType {
     /**
      * Legt den Wert der board-Eigenschaft fest.
      *
-     * @param value
-     *     allowed object is
-     *     {@link mazeclient.generated.BoardType }
-     *
+     * @param value allowed object is
+     *              {@link mazeclient.generated.BoardType }
      */
     public void setBoard(BoardType value) {
         this.board = value;
@@ -88,25 +74,23 @@ public class AwaitMoveMessageType {
 
     /**
      * Gets the value of the treasuresToGo property.
-     *
+     * <p>
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
      * This is why there is not a <CODE>set</CODE> method for the treasuresToGo property.
-     *
+     * <p>
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
      *    getTreasuresToGo().add(newItem);
      * </pre>
-     *
-     *
+     * <p>
+     * <p>
      * <p>
      * Objects of the following type(s) are allowed in the list
      * {@link TreasuresToGoType }
-     *
-     *
      */
     public List<TreasuresToGoType> getTreasuresToGo() {
         if (treasuresToGo == null) {
@@ -117,25 +101,23 @@ public class AwaitMoveMessageType {
 
     /**
      * Gets the value of the foundTreasures property.
-     *
+     * <p>
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
      * This is why there is not a <CODE>set</CODE> method for the foundTreasures property.
-     *
+     * <p>
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
      *    getFoundTreasures().add(newItem);
      * </pre>
-     *
-     *
+     * <p>
+     * <p>
      * <p>
      * Objects of the following type(s) are allowed in the list
      * {@link TreasureType }
-     *
-     *
      */
     public List<TreasureType> getFoundTreasures() {
         if (foundTreasures == null) {
@@ -147,10 +129,8 @@ public class AwaitMoveMessageType {
     /**
      * Ruft den Wert der treasure-Eigenschaft ab.
      *
-     * @return
-     *     possible object is
-     *     {@link TreasureType }
-     *
+     * @return possible object is
+     * {@link TreasureType }
      */
     public TreasureType getTreasure() {
         return treasure;
@@ -159,10 +139,8 @@ public class AwaitMoveMessageType {
     /**
      * Legt den Wert der treasure-Eigenschaft fest.
      *
-     * @param value
-     *     allowed object is
-     *     {@link TreasureType }
-     *     
+     * @param value allowed object is
+     *              {@link TreasureType }
      */
     public void setTreasure(TreasureType value) {
         this.treasure = value;

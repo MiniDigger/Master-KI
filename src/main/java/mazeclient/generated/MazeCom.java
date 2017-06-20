@@ -8,26 +8,14 @@
 
 package mazeclient.generated;
 
-import mazeclient.generated.AcceptMessageType;
-import mazeclient.generated.DisconnectMessageType;
-import mazeclient.generated.LoginMessageType;
-import mazeclient.generated.LoginReplyMessageType;
-import mazeclient.generated.MoveMessageType;
-import mazeclient.generated.WinMessageType;
-
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
 
 
 /**
  * <p>Java-Klasse für anonymous complex type.
- * 
+ * <p>
  * <p>Das folgende Schemafragment gibt den erwarteten Content an, der in dieser Klasse enthalten ist.
- * 
+ * <p>
  * <pre>
  * &lt;complexType>
  *   &lt;complexContent>
@@ -47,18 +35,16 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "loginMessage",
-    "loginReplyMessage",
-    "awaitMoveMessage",
-    "moveMessage",
-    "acceptMessage",
-    "winMessage",
-    "disconnectMessage"
+        "loginMessage",
+        "loginReplyMessage",
+        "awaitMoveMessage",
+        "moveMessage",
+        "acceptMessage",
+        "winMessage",
+        "disconnectMessage"
 })
 @XmlRootElement(name = "MazeCom")
 public class MazeCom {
@@ -85,10 +71,8 @@ public class MazeCom {
     /**
      * Ruft den Wert der loginMessage-Eigenschaft ab.
      *
-     * @return
-     *     possible object is
-     *     {@link mazeclient.generated.LoginMessageType }
-     *
+     * @return possible object is
+     * {@link mazeclient.generated.LoginMessageType }
      */
     public mazeclient.generated.LoginMessageType getLoginMessage() {
         return loginMessage;
@@ -97,10 +81,8 @@ public class MazeCom {
     /**
      * Legt den Wert der loginMessage-Eigenschaft fest.
      *
-     * @param value
-     *     allowed object is
-     *     {@link mazeclient.generated.LoginMessageType }
-     *
+     * @param value allowed object is
+     *              {@link mazeclient.generated.LoginMessageType }
      */
     public void setLoginMessage(LoginMessageType value) {
         this.loginMessage = value;
@@ -109,10 +91,8 @@ public class MazeCom {
     /**
      * Ruft den Wert der loginReplyMessage-Eigenschaft ab.
      *
-     * @return
-     *     possible object is
-     *     {@link LoginReplyMessageType }
-     *
+     * @return possible object is
+     * {@link LoginReplyMessageType }
      */
     public LoginReplyMessageType getLoginReplyMessage() {
         return loginReplyMessage;
@@ -121,10 +101,8 @@ public class MazeCom {
     /**
      * Legt den Wert der loginReplyMessage-Eigenschaft fest.
      *
-     * @param value
-     *     allowed object is
-     *     {@link LoginReplyMessageType }
-     *
+     * @param value allowed object is
+     *              {@link LoginReplyMessageType }
      */
     public void setLoginReplyMessage(LoginReplyMessageType value) {
         this.loginReplyMessage = value;
@@ -133,10 +111,8 @@ public class MazeCom {
     /**
      * Ruft den Wert der awaitMoveMessage-Eigenschaft ab.
      *
-     * @return
-     *     possible object is
-     *     {@link AwaitMoveMessageType }
-     *
+     * @return possible object is
+     * {@link AwaitMoveMessageType }
      */
     public AwaitMoveMessageType getAwaitMoveMessage() {
         return awaitMoveMessage;
@@ -145,10 +121,8 @@ public class MazeCom {
     /**
      * Legt den Wert der awaitMoveMessage-Eigenschaft fest.
      *
-     * @param value
-     *     allowed object is
-     *     {@link AwaitMoveMessageType }
-     *
+     * @param value allowed object is
+     *              {@link AwaitMoveMessageType }
      */
     public void setAwaitMoveMessage(AwaitMoveMessageType value) {
         this.awaitMoveMessage = value;
@@ -157,10 +131,8 @@ public class MazeCom {
     /**
      * Ruft den Wert der moveMessage-Eigenschaft ab.
      *
-     * @return
-     *     possible object is
-     *     {@link MoveMessageType }
-     *
+     * @return possible object is
+     * {@link MoveMessageType }
      */
     public MoveMessageType getMoveMessage() {
         return moveMessage;
@@ -169,10 +141,8 @@ public class MazeCom {
     /**
      * Legt den Wert der moveMessage-Eigenschaft fest.
      *
-     * @param value
-     *     allowed object is
-     *     {@link MoveMessageType }
-     *
+     * @param value allowed object is
+     *              {@link MoveMessageType }
      */
     public void setMoveMessage(MoveMessageType value) {
         this.moveMessage = value;
@@ -181,10 +151,8 @@ public class MazeCom {
     /**
      * Ruft den Wert der acceptMessage-Eigenschaft ab.
      *
-     * @return
-     *     possible object is
-     *     {@link AcceptMessageType }
-     *
+     * @return possible object is
+     * {@link AcceptMessageType }
      */
     public AcceptMessageType getAcceptMessage() {
         return acceptMessage;
@@ -193,10 +161,8 @@ public class MazeCom {
     /**
      * Legt den Wert der acceptMessage-Eigenschaft fest.
      *
-     * @param value
-     *     allowed object is
-     *     {@link AcceptMessageType }
-     *
+     * @param value allowed object is
+     *              {@link AcceptMessageType }
      */
     public void setAcceptMessage(AcceptMessageType value) {
         this.acceptMessage = value;
@@ -205,10 +171,8 @@ public class MazeCom {
     /**
      * Ruft den Wert der winMessage-Eigenschaft ab.
      *
-     * @return
-     *     possible object is
-     *     {@link WinMessageType }
-     *
+     * @return possible object is
+     * {@link WinMessageType }
      */
     public WinMessageType getWinMessage() {
         return winMessage;
@@ -217,10 +181,8 @@ public class MazeCom {
     /**
      * Legt den Wert der winMessage-Eigenschaft fest.
      *
-     * @param value
-     *     allowed object is
-     *     {@link WinMessageType }
-     *
+     * @param value allowed object is
+     *              {@link WinMessageType }
      */
     public void setWinMessage(WinMessageType value) {
         this.winMessage = value;
@@ -229,10 +191,8 @@ public class MazeCom {
     /**
      * Ruft den Wert der disconnectMessage-Eigenschaft ab.
      *
-     * @return
-     *     possible object is
-     *     {@link DisconnectMessageType }
-     *
+     * @return possible object is
+     * {@link DisconnectMessageType }
      */
     public DisconnectMessageType getDisconnectMessage() {
         return disconnectMessage;
@@ -241,10 +201,8 @@ public class MazeCom {
     /**
      * Legt den Wert der disconnectMessage-Eigenschaft fest.
      *
-     * @param value
-     *     allowed object is
-     *     {@link DisconnectMessageType }
-     *     
+     * @param value allowed object is
+     *              {@link DisconnectMessageType }
      */
     public void setDisconnectMessage(DisconnectMessageType value) {
         this.disconnectMessage = value;
@@ -252,11 +210,9 @@ public class MazeCom {
 
     /**
      * Ruft den Wert der mcType-Eigenschaft ab.
-     * 
-     * @return
-     *     possible object is
-     *     {@link MazeComType }
-     *     
+     *
+     * @return possible object is
+     * {@link MazeComType }
      */
     public MazeComType getMcType() {
         return mcType;
@@ -264,11 +220,9 @@ public class MazeCom {
 
     /**
      * Legt den Wert der mcType-Eigenschaft fest.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link MazeComType }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link MazeComType }
      */
     public void setMcType(MazeComType value) {
         this.mcType = value;
@@ -276,7 +230,6 @@ public class MazeCom {
 
     /**
      * Ruft den Wert der id-Eigenschaft ab.
-     * 
      */
     public int getId() {
         return id;
@@ -284,7 +237,6 @@ public class MazeCom {
 
     /**
      * Legt den Wert der id-Eigenschaft fest.
-     * 
      */
     public void setId(int value) {
         this.id = value;
