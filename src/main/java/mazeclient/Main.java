@@ -26,6 +26,8 @@ public class Main {
 		mazeClient.listen(() -> {
 			//TODO do KI here
 			mazeClient.move();
-		});
+		}, (data -> {
+			//TODO do stuff with data here
+		}));
 	}
 }

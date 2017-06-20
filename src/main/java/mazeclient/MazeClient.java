@@ -74,7 +74,7 @@ public class MazeClient {
 		return true;
 	}
 
-	public void listen(MoveHandler handler) {
+	public void listen(MoveHandler handler, ReadDataHandler readDataHandler) {
 		while (doNextMove) {
 			// read packet
 			MazeCom msg = read();
@@ -85,7 +85,7 @@ public class MazeClient {
 
 			// save data
 			AwaitMoveMessageType awaitMoveMsg = msg.getAwaitMoveMessage();
-			// TODO do stuff with the data
+			readDataHandler.handleData(awaitMoveMsg);
 
 			// do our moves, we got 3 tries
 			for (int i = 0; i < 3; i++) {
@@ -157,5 +157,10 @@ public class MazeClient {
 	@FunctionalInterface interface MoveHandler {
 
 		void doMove();
+	}
+
+	@FunctionalInterface interface ReadDataHandler {
+
+		void handleData(AwaitMoveMessageType data);
 	}
 }
