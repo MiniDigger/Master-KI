@@ -1,17 +1,16 @@
 package mazeclient;
 
-import java.io.IOException;
 import java.io.StringReader;
 import java.io.StringWriter;
 import java.net.Socket;
+import java.util.logging.Level;
 import java.util.logging.Logger;
-
-import mazeclient.generated.AwaitMoveMessageType;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 
+import mazeclient.generated.AwaitMoveMessageType;
 import mazeclient.generated.LoginMessageType;
 import mazeclient.generated.LoginReplyMessageType;
 import mazeclient.generated.MazeCom;
@@ -27,43 +26,39 @@ public class MazeClient {
     private static final Logger logger = Logger.getLogger(Main.class.getName());
 
     private Socket socket;
-	private UTFInputStream inputStream;
-	private UTFOutputStream outputStream;
-	private ObjectFactory objectFactory;
-	private JAXBContext jaxbContext;
-	private Marshaller marshaller;
-	private Unmarshaller unmarshaller;
+    private UTFInputStream inputStream;
+    private UTFOutputStream outputStream;
+    private ObjectFactory objectFactory;
+    private JAXBContext jaxbContext;
+    private Marshaller marshaller;
+    private Unmarshaller unmarshaller;
 
     private boolean doNextMove = true;
 
     private int playerId;
 
-	public MazeClient() {
-		objectFactory = new ObjectFactory();
-		try {
-			jaxbContext = JAXBContext.newInstance(MazeCom.class);
-			marshaller = jaxbContext.createMarshaller();
-			unmarshaller = jaxbContext.createUnmarshaller();
-		} catch (JAXBException e) {
-			e.printStackTrace();
-		}
-	}
-
     public MazeClient() {
-        //TODO setup marshaller/unmarshaller
+        objectFactory = new ObjectFactory();
+        try {
+            jaxbContext = JAXBContext.newInstance(MazeCom.class);
+            marshaller = jaxbContext.createMarshaller();
+            unmarshaller = jaxbContext.createUnmarshaller();
+        } catch (JAXBException e) {
+            e.printStackTrace();
+        }
     }
 
-	public boolean connect(String hostname, int port) {
-		try {
-			socket = new Socket(hostname, port);
-			inputStream = new UTFInputStream(socket.getInputStream());
-			outputStream = new UTFOutputStream(socket.getOutputStream());
-			return true;
-		} catch (Exception ex) {
-			ex.printStackTrace();
-			return false;
-		}
-	}
+    public boolean connect(String hostname, int port) {
+        try {
+            socket = new Socket(hostname, port);
+            inputStream = new UTFInputStream(socket.getInputStream());
+            outputStream = new UTFOutputStream(socket.getOutputStream());
+            return true;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return false;
+        }
+    }
 
     public boolean handshake() {
         // send login msg
@@ -113,37 +108,38 @@ public class MazeClient {
         }
     }
 
-	private void send(MazeCom msg) {
-		try {
-			String xml = messageToXMLString(msg);
-			outputStream.writeUTF8(xml);
-		} catch (IOException | JAXBException e) {
-			e.printStackTrace();
-		}
-	}
+    private void send(MazeCom msg) {
+        try {
+            String xml = messageToXMLString(msg);
+            logger.info("Sending: " + xml);
+            outputStream.writeUTF8(xml);
+        } catch (Exception e) {
+            logger.log(Level.SEVERE, "Error while sending msg", e);
+        }
+    }
 
-	private MazeCom read() {
-		MazeCom msg = null;
-		try {
-			String xml = inputStream.readUTF8();
-			msg = xmlStringToMessage(xml);
-		} catch (IOException | JAXBException e) {
-			e.printStackTrace();
-		}
-		return msg;
-	}
+    private MazeCom read() {
+        MazeCom msg = null;
+        try {
+            String xml = inputStream.readUTF8();
+            logger.info("Reading: " + xml);
+            msg = xmlStringToMessage(xml);
+        } catch (Exception e) {
+            logger.log(Level.SEVERE, "Error while reading msg", e);
+        }
+        return msg;
+    }
 
-	MazeCom xmlStringToMessage(String xml) throws JAXBException {
-		StringReader sr = new StringReader(xml);
-		return (MazeCom) unmarshaller.unmarshal(sr);
-	}
+    private MazeCom xmlStringToMessage(String xml) throws JAXBException {
+        StringReader sr = new StringReader(xml);
+        return (MazeCom) unmarshaller.unmarshal(sr);
+    }
 
-	String messageToXMLString(MazeCom message) throws JAXBException {
-		StringWriter sw = new StringWriter();
-		marshaller.marshal(message, sw);
-		System.out.println(sw.toString());
-		return sw.toString();
-	}
+    private String messageToXMLString(MazeCom message) throws JAXBException {
+        StringWriter sw = new StringWriter();
+        marshaller.marshal(message, sw);
+        return sw.toString();
+    }
 
     @FunctionalInterface
     interface MoveHandler {
