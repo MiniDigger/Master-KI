@@ -62,6 +62,9 @@ public class GreedyKi extends KI {
 								bestMove = possibleMove;
 								bestShiftCard = shiftCard;
 								bestShiftPos = shiftPoint;
+								System.out.println("GOLD! WE FOUND GOLD!");
+							}else{
+								System.out.println("We ain't found shit down here");
 							}
 						}
 					}
