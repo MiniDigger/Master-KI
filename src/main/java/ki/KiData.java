@@ -1,15 +1,11 @@
 package ki;
 
-import java.awt.Point;
-import java.util.List;
-
 import mazeclient.MazeClient;
-import mazeclient.generated.AwaitMoveMessageType;
-import mazeclient.generated.BoardType;
+import mazeclient.generated.*;
 import mazeclient.generated.BoardType.Row;
-import mazeclient.generated.CardType;
-import mazeclient.generated.TreasureType;
-import mazeclient.generated.TreasuresToGoType;
+
+import java.awt.*;
+import java.util.List;
 
 public class KiData {
 	CardType card;
@@ -39,7 +35,11 @@ public class KiData {
 			}
 		}
 		card = boardType.getShiftCard();
-		forbiddenPos = new Point(boardType.getForbidden().getRow(), boardType.getForbidden().getCol());
+		if (boardType.getForbidden() != null) {
+			forbiddenPos = new Point(boardType.getForbidden().getRow(), boardType.getForbidden().getCol());
+		} else {
+			forbiddenPos = new Point(0, 0);
+		}
 	}
 
 	public void updateBoard(BoardType boardType, List<TreasuresToGoType> treasuresToGo) {
@@ -64,7 +64,7 @@ public class KiData {
 		}
 		oldTreasures = treasuresToGo;
 		card = boardType.getShiftCard();
-		forbiddenPos = new Point(boardType.getForbidden().getRow(), boardType.getForbidden().getCol());
+		forbiddenPos = new Point(boardType.getForbidden().getCol(), boardType.getForbidden().getRow());
 	}
 
 }

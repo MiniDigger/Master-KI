@@ -1,5 +1,8 @@
 package mazeclient;
 
+import ki.GreedyKi;
+import ki.KI;
+import ki.KiData;
 import mazeclient.generated.CardType;
 
 import java.io.InputStreamReader;
@@ -16,6 +19,8 @@ public class Main {
 	private static Scanner scanner = new Scanner(new InputStreamReader(System.in));
 
 	private static BoardRenderer boardRenderer = new BoardRenderer();
+	private static KiData kiData;
+	private static KI ki;
 
 	private static CardType shiftCard;
 
@@ -36,18 +41,27 @@ public class Main {
 		}
 
 		mazeClient.setReadDataHandler((data -> {
-			// TODO do stuff with data here
+			// debug stuff
 			shiftCard = data.getBoard().getShiftCard();
 			boardRenderer.render(shiftCard, data.getBoard());
+
+			// ki data
+			if (kiData == null) {
+				kiData = new KiData(data);
+			} else {
+				kiData.updateBoard(data.getBoard(), data.getTreasuresToGo());
+			}
 		}));
 
 		mazeClient.setMoveHandler(() -> {
-			// TODO do KI here
-			mazeClient.move(0, 0, 0, 0, shiftCard);
+			if (ki == null) {
+				ki = new GreedyKi(kiData, mazeClient);
+			}
+			ki.move();
 		});
 
 		// todo debug client (overrides KI!)
-		mazeClient.setMoveHandler(() -> readMoveFromCmd(mazeClient));
+		//mazeClient.setMoveHandler(() -> readMoveFromCmd(mazeClient));
 
 		mazeClient.setErrorHandler((msg, expectedType) -> {
 			logger.warning("Expected " + expectedType.value() + ", got " + msg.getMcType());

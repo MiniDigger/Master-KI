@@ -12,7 +12,7 @@ public class GreedyKi extends KI {
 	}
 
 	@Override
-	void move() {
+	public void move() {
 		Point treasurePos = getPositionOfTreasure();
 		Point playerPos = data.playerPos;
 		// art der karte -> anzahl drehungen
@@ -28,7 +28,7 @@ public class GreedyKi extends KI {
 		outer: for (int i = 0; i < POSTOSHIFTCARD.length; i++) {
 			Point shiftPoint = new Point(POSTOSHIFTCARD[i][0], POSTOSHIFTCARD[i][1]);
 			if (shiftPoint.equals(data.forbiddenPos))
-				break;
+				continue ;
 			for (int j = 0; j < rotateCount; j++) {
 				Board newBoard = new Board(data.board);
 				boolean vertical = shiftPoint.y == 0 || shiftPoint.y == 6;
