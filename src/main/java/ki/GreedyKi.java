@@ -30,8 +30,8 @@ public class GreedyKi extends KI {
 			if (shiftPoint.equals(data.forbiddenPos))
 				continue;
 			for (int j = 0; j < rotateCount; j++) {
-				Point tempPlayerPos = playerPos;
-				Point tempTreasurePos = treasurePos;
+				Point tempPlayerPos = (Point) playerPos.clone();
+				Point tempTreasurePos = (Point) treasurePos.clone();
 				Board newBoard = new Board(data.board);
 				boolean vertical = shiftPoint.y == 0 || shiftPoint.y == 6;
 				boolean rightTop = shiftPoint.y == 0 || shiftPoint.x == 6;
