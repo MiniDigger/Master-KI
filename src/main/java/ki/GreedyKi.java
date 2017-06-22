@@ -30,18 +30,20 @@ public class GreedyKi extends KI {
 			if (shiftPoint.equals(data.forbiddenPos))
 				continue;
 			for (int j = 0; j < rotateCount; j++) {
+				Point tempPlayerPos = playerPos;
+				Point tempTreasurePos = treasurePos;
 				Board newBoard = new Board(data.board);
 				boolean vertical = shiftPoint.y == 0 || shiftPoint.y == 6;
 				boolean rightTop = shiftPoint.y == 0 || shiftPoint.x == 6;
-				Point[] tempPos = newBoard.placeShiftCard(shiftCard, shiftPoint, playerPos, treasurePos, vertical,
-						rightTop);
-				playerPos = tempPos[0];
-				treasurePos = tempPos[1];
-				if (treasurePos.x < 0 || treasurePos.x > 6 || treasurePos.y < 0 || treasurePos.y > 6)
+				Point[] tempPos = newBoard.placeShiftCard(shiftCard, shiftPoint, tempPlayerPos, tempTreasurePos,
+						vertical, rightTop);
+				tempPlayerPos = tempPos[0];
+				tempTreasurePos = tempPos[1];
+				if (tempTreasurePos.x < 0 || tempTreasurePos.x > 6 || tempTreasurePos.y < 0 || tempTreasurePos.y > 6)
 					break;
 
-				for (Point possibleMove : possibleMoves(playerPos, newBoard)) {
-					int distance = getDistance(treasurePos, possibleMove);
+				for (Point possibleMove : possibleMoves(tempPlayerPos, newBoard)) {
+					int distance = getDistance(tempTreasurePos, possibleMove);
 					if (distance < minDistance) {
 						minDistance = distance;
 						bestMove = possibleMove;
