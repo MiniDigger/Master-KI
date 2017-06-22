@@ -15,6 +15,8 @@ public class Main {
 
 	private static Scanner scanner = new Scanner(new InputStreamReader(System.in));
 
+	private static BoardRenderer boardRenderer = new BoardRenderer();
+
 	private static CardType shiftCard;
 
 	public static void main(String[] args) {
@@ -36,6 +38,7 @@ public class Main {
 		mazeClient.setReadDataHandler((data -> {
 			// TODO do stuff with data here
 			shiftCard = data.getBoard().getShiftCard();
+			boardRenderer.render(shiftCard, data.getBoard());
 		}));
 
 		mazeClient.setMoveHandler(() -> {
