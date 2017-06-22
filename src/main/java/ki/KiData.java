@@ -1,7 +1,9 @@
 package ki;
 
+import java.awt.Point;
 import java.util.List;
 
+import mazeclient.MazeClient;
 import mazeclient.generated.AwaitMoveMessageType;
 import mazeclient.generated.BoardType;
 import mazeclient.generated.BoardType.Row;
@@ -14,6 +16,8 @@ public class KiData {
 	Board board;
 	TreasureType treasure;
 	List<TreasuresToGoType> oldTreasures;
+	Point forbiddenPos;
+	Point playerPos;
 
 	public KiData(AwaitMoveMessageType data) {
 		initBoard(data.getBoard());
@@ -30,9 +34,12 @@ public class KiData {
 				CardType cardType = row.getCol().get(j);
 				Feld feld = new Feld(cardType);
 				board.setFeld(j, i, feld);
+				if (cardType.getPin().getPlayerID().contains(MazeClient.playerId))
+					playerPos = new Point(j, i);
 			}
 		}
 		card = boardType.getShiftCard();
+		forbiddenPos = new Point(boardType.getForbidden().getRow(), boardType.getForbidden().getCol());
 	}
 
 	public void updateBoard(BoardType boardType, List<TreasuresToGoType> treasuresToGo) {
@@ -41,6 +48,8 @@ public class KiData {
 			for (int j = 0; j < 7; j++) {
 				CardType cardType = row.getCol().get(j);
 				Feld feld = new Feld(cardType);
+				if (cardType.getPin().getPlayerID().contains(MazeClient.playerId))
+					playerPos = new Point(j, i);
 				for (int k = 0; k < treasuresToGo.size(); k++) {
 					if (treasuresToGo.get(k).getTreasures() != oldTreasures.get(k).getTreasures()) {
 						for (int l = 0; l < cardType.getPin().getPlayerID().size(); l++) {
@@ -55,6 +64,7 @@ public class KiData {
 		}
 		oldTreasures = treasuresToGo;
 		card = boardType.getShiftCard();
+		forbiddenPos = new Point(boardType.getForbidden().getRow(), boardType.getForbidden().getCol());
 	}
 
 }

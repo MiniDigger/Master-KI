@@ -41,7 +41,7 @@ public class MazeClient {
 	private boolean displayReceivedXml = false;
 	private boolean displaySendXml = true;
 
-	private int playerId = -1;
+	public static int playerId = -1;
 	private int moveTry = 0;
 
 	public MazeClient() {
