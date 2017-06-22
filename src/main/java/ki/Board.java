@@ -31,7 +31,7 @@ public class Board {
 	public Point[] placeShiftCard(CardType card, Point cardPos, Point playerPos, Point treasurePos, boolean vertical,
 			boolean rightTop) {
 		// playerPos,treasurePos
-		Point[] positions = new Point[] { cardPos, treasurePos };
+		Point[] positions = new Point[] { playerPos, treasurePos };
 		if (vertical) {
 			int col = cardPos.x;
 			if (playerPos.x == col) {
