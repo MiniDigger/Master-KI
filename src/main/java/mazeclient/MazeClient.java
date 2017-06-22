@@ -147,7 +147,7 @@ public class MazeClient {
 	}
 
 	public void move(int playerX, int playerY, int cardX, int cardY, CardType shiftCard) {
-		logger.info("DO MOVE: playerpos " + playerX + ", " + playerY + " shiftpos " + cardX + ", " + cardY);
+		logger.info("DO MOVE: playerpos " + playerY + ", " + playerX + " shiftpos " + cardY + ", " + cardX);
 		MazeCom mazeCom = objectFactory.createMazeCom();
 		MoveMessageType moveMsg = objectFactory.createMoveMessageType();
 		PositionType playerPos = objectFactory.createPositionType();
