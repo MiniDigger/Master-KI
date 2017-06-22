@@ -8,14 +8,18 @@ import java.util.List;
 import java.util.Queue;
 import java.util.Set;
 
+import mazeclient.MazeClient;
 import mazeclient.generated.CardType;
 import mazeclient.generated.CardType.Openings;
+import mazeclient.generated.ObjectFactory;
 
 public abstract class KI {
 
 	protected KiData data;
 	protected final int[][] POSTOSHIFTCARD = new int[][] { { 1, 0 }, { 3, 0 }, { 5, 0 }, { 6, 1 }, { 6, 3 }, { 6, 5 },
 			{ 5, 6 }, { 3, 6 }, { 1, 6 }, { 0, 5 }, { 0, 3 }, { 0, 1 } };
+	protected ObjectFactory of;
+	protected MazeClient client;
 
 	Point getPositionOfTreasure() {
 		for (int i = 0; i < 7; i++) {
@@ -28,8 +32,9 @@ public abstract class KI {
 		return null;
 	}
 
-	public KI(KiData data) {
+	public KI(KiData data, MazeClient client) {
 		this.data = data;
+		this.client = client;
 	}
 
 	public boolean isCardIShape(CardType card) {
@@ -45,14 +50,21 @@ public abstract class KI {
 	 * @return
 	 */
 	public CardType rotateCard(CardType card) {
-		Openings openings = card.getOpenings();
+		if (of == null)
+			of = new ObjectFactory();
+		CardType newCard = of.createCardType();
+		newCard.setOpenings(card.getOpenings());
+		newCard.setPin(card.getPin());
+		newCard.setTreasure(card.getTreasure());
+
+		Openings openings = newCard.getOpenings();
 		boolean rightOpening = openings.isRight();
 		openings.setRight(openings.isTop());
 		openings.setTop(openings.isLeft());
 		openings.setLeft(openings.isBottom());
 		openings.setBottom(rightOpening);
-		card.setOpenings(openings);
-		return card;
+		newCard.setOpenings(openings);
+		return newCard;
 	}
 
 	public Set<Point> possibleMoves(Point pos, Board board) {
