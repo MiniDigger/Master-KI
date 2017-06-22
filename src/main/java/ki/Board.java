@@ -28,9 +28,24 @@ public class Board {
 		}
 	}
 
-	public void placeShiftCard(CardType card, Point pos, boolean vertical, boolean rightTop) {
+	public Point[] placeShiftCard(CardType card, Point cardPos, Point playerPos, Point treasurePos, boolean vertical,
+			boolean rightTop) {
+		// playerPos,treasurePos
+		Point[] positions = new Point[] { cardPos, treasurePos };
 		if (vertical) {
-			int col = pos.x;
+			int col = cardPos.x;
+			if (playerPos.x == col) {
+				positions[0].y += rightTop ? 1 : -1;
+				if (positions[0].y > 6) {
+					positions[0].y = 0;
+				}
+				if (positions[0].y < 0) {
+					positions[0].y = 6;
+				}
+			}
+			if (treasurePos.x == col) {
+				positions[1].y += rightTop ? 1 : -1;
+			}
 			for (int i = 0; i < 6; i++) {
 				if (rightTop) {
 					board[6 - i][col] = board[6 - i - 1][col];
@@ -38,9 +53,21 @@ public class Board {
 					board[i][col] = board[i + 1][col];
 				}
 			}
-			board[pos.y][pos.x] = new Feld(card);
+			board[cardPos.y][cardPos.x] = new Feld(card);
 		} else {
-			int row = pos.y;
+			int row = cardPos.y;
+			if (playerPos.y == row) {
+				positions[0].x += rightTop ? -1 : 1;
+				if (positions[0].x > 6) {
+					positions[0].x = 0;
+				}
+				if (positions[0].x < 0) {
+					positions[0].x = 6;
+				}
+			}
+			if (treasurePos.y == row) {
+				positions[1].x += rightTop ? -1 : 1;
+			}
 			for (int i = 0; i < 6; i++) {
 				if (rightTop) {
 					board[row][i] = board[row][i + 1];
@@ -48,7 +75,8 @@ public class Board {
 					board[row][6 - i] = board[row][6 - i - 1];
 				}
 			}
-			board[pos.y][pos.x] = new Feld(card);
+			board[cardPos.y][cardPos.x] = new Feld(card);
 		}
+		return positions;
 	}
 }

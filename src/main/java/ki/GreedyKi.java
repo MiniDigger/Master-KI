@@ -28,12 +28,17 @@ public class GreedyKi extends KI {
 		outer: for (int i = 0; i < POSTOSHIFTCARD.length; i++) {
 			Point shiftPoint = new Point(POSTOSHIFTCARD[i][0], POSTOSHIFTCARD[i][1]);
 			if (shiftPoint.equals(data.forbiddenPos))
-				continue ;
+				continue;
 			for (int j = 0; j < rotateCount; j++) {
 				Board newBoard = new Board(data.board);
 				boolean vertical = shiftPoint.y == 0 || shiftPoint.y == 6;
 				boolean rightTop = shiftPoint.y == 0 || shiftPoint.x == 6;
-				newBoard.placeShiftCard(shiftCard, shiftPoint, vertical, rightTop);
+				Point[] tempPos = newBoard.placeShiftCard(shiftCard, shiftPoint, playerPos, treasurePos, vertical,
+						rightTop);
+				playerPos = tempPos[0];
+				treasurePos = tempPos[1];
+				if (treasurePos.x < 0 || treasurePos.x > 6 || treasurePos.y < 0 || treasurePos.y > 6)
+					break;
 
 				for (Point possibleMove : possibleMoves(playerPos, newBoard)) {
 					int distance = getDistance(treasurePos, possibleMove);
