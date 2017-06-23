@@ -42,7 +42,9 @@ public class KiData {
 		}
 	}
 
-	public void updateBoard(BoardType boardType, List<TreasuresToGoType> treasuresToGo) {
+	public void updateBoard(AwaitMoveMessageType data) {
+		BoardType boardType=data.getBoard();
+		List<TreasuresToGoType> treasuresToGo=data.getTreasuresToGo();
 		for (int i = 0; i < 7; i++) {
 			Row row = boardType.getRow().get(i);
 			for (int j = 0; j < 7; j++) {
@@ -62,6 +64,7 @@ public class KiData {
 				board.setFeld(j, i, feld);
 			}
 		}
+		treasure=data.getTreasure();
 		oldTreasures = treasuresToGo;
 		card = boardType.getShiftCard();
 		forbiddenPos = new Point(boardType.getForbidden().getCol(), boardType.getForbidden().getRow());

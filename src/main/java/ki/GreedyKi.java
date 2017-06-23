@@ -64,7 +64,7 @@ public class GreedyKi extends KI {
 								bestShiftCard = shiftCard;
 								bestShiftPos = shiftPoint;
 								System.out.println("GOLD! WE FOUND GOLD!");
-							}else{
+							} else {
 								System.out.println("We ain't found shit down here");
 							}
 						}
@@ -78,7 +78,8 @@ public class GreedyKi extends KI {
 		client.move(bestMove.x, bestMove.y, bestShiftPos.x, bestShiftPos.y, bestShiftCard);
 	}
 
-	public boolean moveDim2(Point treasurePos, Point playerPos, Point forbiddenPos, Board board, CardType newShiftCard) {
+	public boolean moveDim2(Point treasurePos, Point playerPos, Point forbiddenPos, Board board,
+			CardType newShiftCard) {
 		// art der karte -> anzahl drehungen
 		int rotateCount = isCardIShape(newShiftCard) ? 1 : 3;
 

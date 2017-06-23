@@ -1,13 +1,13 @@
 package mazeclient;
 
+import java.io.InputStreamReader;
+import java.util.Scanner;
+import java.util.logging.Logger;
+
 import ki.GreedyKi;
 import ki.KI;
 import ki.KiData;
 import mazeclient.generated.CardType;
-
-import java.io.InputStreamReader;
-import java.util.Scanner;
-import java.util.logging.Logger;
 
 /**
  * Created by mbenndorf on 20.06.2017.
@@ -49,7 +49,7 @@ public class Main {
 			if (kiData == null) {
 				kiData = new KiData(data);
 			} else {
-				kiData.updateBoard(data.getBoard(), data.getTreasuresToGo());
+				kiData.updateBoard(data);
 			}
 		}));
 
@@ -61,7 +61,7 @@ public class Main {
 		});
 
 		// todo debug client (overrides KI!)
-		//mazeClient.setMoveHandler(() -> readMoveFromCmd(mazeClient));
+		// mazeClient.setMoveHandler(() -> readMoveFromCmd(mazeClient));
 
 		mazeClient.setErrorHandler((msg, expectedType) -> {
 			logger.warning("Expected " + expectedType.value() + ", got " + msg.getMcType());

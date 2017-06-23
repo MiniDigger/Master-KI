@@ -85,6 +85,12 @@ public abstract class KI {
 		}
 		return moves;
 	}
+	
+	public int[][] weightMapDijkstra(Point treasurePos, Board board) {
+		int[][] weightedMap=new int[7][7];
+		
+		return weightedMap;
+	}
 
 	private List<Point> getNeighbors(Point pos, Board board) {
 		List<Point> neighbors = new ArrayList<>();
