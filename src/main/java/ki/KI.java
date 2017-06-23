@@ -36,8 +36,8 @@ public abstract class KI {
 
 	public boolean isCardIShape(CardType card) {
 		Openings openings = card.getOpenings();
-		return (openings.isTop() && openings.isBottom() && !openings.isLeft() && !openings.isRight()) || (
-				!openings.isTop() && !openings.isBottom() && openings.isLeft() && openings.isRight());
+		return (openings.isTop() && openings.isBottom() && !openings.isLeft() && !openings.isRight())
+				|| (!openings.isTop() && !openings.isBottom() && openings.isLeft() && openings.isRight());
 	}
 
 	/**
@@ -85,11 +85,56 @@ public abstract class KI {
 		}
 		return moves;
 	}
-	
-	public int[][] weightMapDijkstra(Point treasurePos, Board board) {
-		int[][] weightedMap=new int[7][7];
-		
-		return weightedMap;
+
+	public List<PointWeightPair> weightMapDijkstra(Point treasurePos, Board board) {
+		List<PointWeightPair> weightedList = new ArrayList<>();
+		Queue<PointWeightPair> queue = new PriorityQueue<>();
+		PointWeightPair pwp = new PointWeightPair(treasurePos, 0);
+		queue.add(pwp);
+		weightedList.add(pwp);
+		for (int i = 0; i < 7; i++) {
+			for (int j = 0; j < 7; j++) {
+				if (treasurePos.x == i && treasurePos.y == j)
+					continue;
+				pwp = new PointWeightPair(new Point(i, j), Integer.MAX_VALUE);
+				queue.add(pwp);
+				weightedList.add(pwp);
+			}
+		}
+		while (!queue.isEmpty()) {
+			PointWeightPair act = queue.poll();
+			for (PointWeightPair pair : getWeightedNeighbors(act, board)) {
+				PointWeightPair toCompare = weightedList.get(weightedList.indexOf(pair));
+				if (toCompare.weight > pair.weight) {
+					toCompare.weight = pair.weight;
+					queue.remove(toCompare);
+					queue.add(toCompare);
+				}
+			}
+		}
+		return weightedList;
+	}
+
+	private List<PointWeightPair> getWeightedNeighbors(PointWeightPair pair, Board board) {
+		Point pos = pair.point;
+		Openings openings = board.board[pos.y][pos.x].getOpenings();
+		int weight = pair.weight;
+		List<PointWeightPair> weightedNeighbors = new ArrayList<>();
+
+		if (pos.y - 1 >= 0)
+			weightedNeighbors.add(new PointWeightPair(new Point(pos.y - 1, pos.x), weight + (openings.isTop() ? 5 : 1)
+					+ (board.board[pos.y - 1][pos.x].getOpenings().isBottom() ? 5 : 1)));
+		if (pos.x + 1 < 7)
+			weightedNeighbors.add(new PointWeightPair(new Point(pos.y, pos.x + 1), weight + (openings.isRight() ? 5 : 1)
+					+ (board.board[pos.y][pos.x + 1].getOpenings().isLeft() ? 5 : 1)));
+		if (pos.y + 1 < 7)
+			weightedNeighbors.add(new PointWeightPair(new Point(pos.y + 1, pos.x), weight
+					+ (openings.isBottom() ? 5 : 1) + (board.board[pos.y + 1][pos.x].getOpenings().isTop() ? 5 : 1)));
+		if (pos.x - 1 >= 0)
+			weightedNeighbors.add(new PointWeightPair(new Point(pos.y, pos.x - 1), weight + (openings.isLeft() ? 5 : 1)
+					+ (board.board[pos.y][pos.x - 1].getOpenings().isRight() ? 5 : 1)));
+
+		return weightedNeighbors;
 	}
 
 	private List<Point> getNeighbors(Point pos, Board board) {
