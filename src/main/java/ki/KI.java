@@ -1,14 +1,18 @@
 package ki;
 
+import java.awt.Point;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.PriorityQueue;
+import java.util.Queue;
+import java.util.Set;
+
 import mazeclient.MazeClient;
 import mazeclient.generated.CardType;
 import mazeclient.generated.CardType.Openings;
 import mazeclient.generated.ObjectFactory;
-
-import java.awt.*;
-import java.util.*;
-import java.util.List;
-import java.util.Queue;
 
 public abstract class KI {
 
@@ -26,6 +30,8 @@ public abstract class KI {
 				}
 			}
 		}
+		if (data.treasure.equals(data.card.getTreasure()))
+			return data.playerPos;
 		return null;
 	}
 
@@ -50,7 +56,12 @@ public abstract class KI {
 		if (of == null)
 			of = new ObjectFactory();
 		CardType newCard = of.createCardType();
-		newCard.setOpenings(card.getOpenings());
+		Openings op = of.createCardTypeOpenings();
+		op.setTop(card.getOpenings().isTop());
+		op.setRight(card.getOpenings().isRight());
+		op.setBottom(card.getOpenings().isBottom());
+		op.setLeft(card.getOpenings().isLeft());
+		newCard.setOpenings(op);
 		newCard.setPin(card.getPin());
 		newCard.setTreasure(card.getTreasure());
 
@@ -122,17 +133,17 @@ public abstract class KI {
 		List<PointWeightPair> weightedNeighbors = new ArrayList<>();
 
 		if (pos.y - 1 >= 0)
-			weightedNeighbors.add(new PointWeightPair(new Point(pos.y - 1, pos.x), weight + (openings.isTop() ? 5 : 1)
-					+ (board.board[pos.y - 1][pos.x].getOpenings().isBottom() ? 5 : 1)));
+			weightedNeighbors.add(new PointWeightPair(new Point(pos.x, pos.y - 1), weight + (openings.isTop() ? 1 : 5)
+					+ (board.board[pos.y - 1][pos.x].getOpenings().isBottom() ? 1 : 5)));
 		if (pos.x + 1 < 7)
-			weightedNeighbors.add(new PointWeightPair(new Point(pos.y, pos.x + 1), weight + (openings.isRight() ? 5 : 1)
-					+ (board.board[pos.y][pos.x + 1].getOpenings().isLeft() ? 5 : 1)));
+			weightedNeighbors.add(new PointWeightPair(new Point(pos.x + 1, pos.y), weight + (openings.isRight() ? 1 : 5)
+					+ (board.board[pos.y][pos.x + 1].getOpenings().isLeft() ? 1 : 5)));
 		if (pos.y + 1 < 7)
-			weightedNeighbors.add(new PointWeightPair(new Point(pos.y + 1, pos.x), weight
-					+ (openings.isBottom() ? 5 : 1) + (board.board[pos.y + 1][pos.x].getOpenings().isTop() ? 5 : 1)));
+			weightedNeighbors.add(new PointWeightPair(new Point(pos.x, pos.y + 1), weight
+					+ (openings.isBottom() ? 1 : 5) + (board.board[pos.y + 1][pos.x].getOpenings().isTop() ? 1 : 5)));
 		if (pos.x - 1 >= 0)
-			weightedNeighbors.add(new PointWeightPair(new Point(pos.y, pos.x - 1), weight + (openings.isLeft() ? 5 : 1)
-					+ (board.board[pos.y][pos.x - 1].getOpenings().isRight() ? 5 : 1)));
+			weightedNeighbors.add(new PointWeightPair(new Point(pos.x - 1, pos.y), weight + (openings.isLeft() ? 1 : 5)
+					+ (board.board[pos.y][pos.x - 1].getOpenings().isRight() ? 1 : 5)));
 
 		return weightedNeighbors;
 	}
