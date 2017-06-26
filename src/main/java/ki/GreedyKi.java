@@ -1,6 +1,7 @@
 package ki;
 
 import java.awt.Point;
+import java.util.List;
 
 import mazeclient.MazeClient;
 import mazeclient.generated.CardType;
@@ -15,6 +16,7 @@ public class GreedyKi extends KI {
 	public void move() {
 		Point treasurePos = getPositionOfTreasure();
 		Point playerPos = data.playerPos;
+		boolean treasureOnShift = treasurePos.equals(playerPos);
 		// art der karte -> anzahl drehungen
 		int rotateCount = isCardIShape(data.card) ? 1 : 3;
 
@@ -30,44 +32,53 @@ public class GreedyKi extends KI {
 			if (shiftPoint.equals(data.forbiddenPos))
 				continue;
 			for (int j = 0; j < rotateCount; j++) {
-				Point tempPlayerPos = (Point) playerPos.clone();
-				Point tempTreasurePos = (Point) treasurePos.clone();
+				Point tempPlayerPos = new Point(playerPos);
+				Point tempTreasurePos = treasureOnShift ? new Point(shiftPoint) : new Point(treasurePos);
 				Board newBoard = new Board(data.board);
 				boolean vertical = shiftPoint.y == 0 || shiftPoint.y == 6;
 				boolean rightTop = shiftPoint.y == 0 || shiftPoint.x == 6;
 				Point[] tempPos = newBoard.placeShiftCard(shiftCard, shiftPoint, tempPlayerPos, tempTreasurePos,
 						vertical, rightTop);
 				tempPlayerPos = tempPos[0];
-				tempTreasurePos = tempPos[1];
+				tempTreasurePos = treasureOnShift ? shiftPoint : tempPos[1];
 				if (tempTreasurePos.x < 0 || tempTreasurePos.x > 6 || tempTreasurePos.y < 0 || tempTreasurePos.y > 6)
 					break;
 
+				List<PointWeightPair> weightedMap = weightMapDijkstra(tempTreasurePos, newBoard);
 				for (Point possibleMove : possibleMoves(tempPlayerPos, newBoard)) {
-					int distance = getDistance(tempTreasurePos, possibleMove);
+					// int distance = getDistance(tempTreasurePos,
+					// possibleMove);
+					int distance = weightedMap.get(weightedMap.indexOf(new PointWeightPair(possibleMove, 0))).weight;
 					if (distance < minDistance) {
+						System.out.println("ShiftPos: " + shiftPoint.x + "/" + shiftPoint.y);
+						System.out.println("Openings: " + shiftCard.getOpenings());
+						System.out.println(possibleMoves(tempPlayerPos, newBoard));
+						minDistance = distance;
+						bestMove = possibleMove;
+						bestShiftCard = shiftCard;
+						bestShiftPos = shiftPoint;
+						if (distance == 0)
+							break outer;
+						// } else {
+						// Point tempForbidden = new Point(shiftPoint);
+						// if (tempForbidden.x == 0 || tempForbidden.x == 6)
+						// tempForbidden.x = Math.abs(tempForbidden.x - 6);
+						// if (tempForbidden.y == 0 || tempForbidden.y == 6)
+						// tempForbidden.y = Math.abs(tempForbidden.y - 6);
+						// if (moveDim2(tempTreasurePos, tempPlayerPos,
+						// tempForbidden, newBoard,
+						// data.board.board[tempForbidden.y][tempForbidden.x]))
+						// {
 						// minDistance = distance;
 						// bestMove = possibleMove;
 						// bestShiftCard = shiftCard;
 						// bestShiftPos = shiftPoint;
-						if (distance == 0) {
-							break outer;
-						} else {
-							Point tempForbidden = new Point(shiftPoint);
-							if (tempForbidden.x == 0 || tempForbidden.x == 6)
-								tempForbidden.x = Math.abs(tempForbidden.x - 6);
-							if (tempForbidden.y == 0 || tempForbidden.y == 6)
-								tempForbidden.y = Math.abs(tempForbidden.y - 6);
-							if (moveDim2(tempTreasurePos, tempPlayerPos, tempForbidden, newBoard,
-									data.board.board[tempForbidden.y][tempForbidden.x])) {
-								minDistance = distance;
-								bestMove = possibleMove;
-								bestShiftCard = shiftCard;
-								bestShiftPos = shiftPoint;
-								System.out.println("GOLD! WE FOUND GOLD!");
-							} else {
-								System.out.println("We ain't found shit down here");
-							}
-						}
+						// System.out.println("GOLD! WE FOUND GOLD!");
+						// } else {
+						// System.out.println("We ain't found shit down
+						// here");
+						// }
+						// }
 					}
 				}
 
@@ -75,6 +86,9 @@ public class GreedyKi extends KI {
 			}
 		}
 
+		System.out.println("ShiftPos: " + bestShiftPos.x + "/" + bestShiftPos.y);
+		System.out.println("Openings: " + bestShiftCard.getOpenings());
+		System.out.println("Move to: " + bestMove.x + "/" + bestMove.y);
 		client.move(bestMove.x, bestMove.y, bestShiftPos.x, bestShiftPos.y, bestShiftCard);
 	}
 
