@@ -1,7 +1,11 @@
 package ki;
 
 import java.awt.Point;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
 
 import mazeclient.MazeClient;
 import mazeclient.generated.CardType;
@@ -55,12 +59,62 @@ public class GreedyKi extends KI {
 						bestMove = possibleMove;
 						bestShiftCard = shiftCard;
 						bestShiftPos = shiftPoint;
-						if (distance == 0)
+						if (distance == 0) {
 							break outer;
+						}
 					}
 				}
 
 				shiftCard = rotateCard(shiftCard);
+			}
+		}
+		if (bestMove.x == playerPos.x && bestMove.y == playerPos.y) {
+			// Gegner verbauen --> suche Shiftcard um Gegner zu ärgern
+			System.out.println("Gegner versuchen zu verbauen");
+			Map<Integer, Integer> treasuresForPlayer = new HashMap<>();
+			int playerWithMostTreasures = -1;
+			int mostTreasures = Integer.MAX_VALUE;
+			for (int i = 0; i < data.oldTreasures.size(); i++) {
+				if (data.oldTreasures.get(i).getPlayer() == MazeClient.playerId) {
+					continue;
+				}
+				if (data.oldTreasures.get(i).getTreasures() < mostTreasures) {
+					mostTreasures = data.oldTreasures.get(i).getTreasures();
+					playerWithMostTreasures = data.oldTreasures.get(i).getPlayer();
+				}
+				treasuresForPlayer.put(data.oldTreasures.get(i).getPlayer(), data.oldTreasures.get(i).getTreasures());
+			}
+			boolean randShift = false;
+			Set<Entry<Integer, Point>> entrySet = data.enemies.entrySet();
+			for (Entry<Integer, Point> entry : entrySet) {
+				int x = entry.getValue().x;
+				int y = entry.getValue().y;
+				if ((x == 1 || x == 3 || x == 5) || (y == 1 || y == 3 || y == 5)) {
+					// ist Gegner am Rand?
+					int shiftPosX = x;
+					int shiftPosY = y;
+					if (x == 0 || x == 6) {
+						shiftPosX = (x + 6) % 12;
+					}
+					if (y == 0 || y == 6) {
+						shiftPosY = (y + 6) % 12;
+					}
+					if (shiftPosX == data.forbiddenPos.x && shiftPosY == data.forbiddenPos.y) {
+						continue;
+					}
+					// wir können Karte reinschieben
+					if (shiftPosX != x || shiftPosY != y) {
+						randShift = true;
+						bestShiftPos = new Point(shiftPosX, shiftPosY);
+					}
+					// wenn höchste Schatz sabotiert werden kann direkt Schleife
+					// verlassen
+					if (entry.getKey() == playerWithMostTreasures) {
+						break;
+					}
+				} else {
+					continue;
+				}
 			}
 		}
 		client.move(bestMove.x, bestMove.y, bestShiftPos.x, bestShiftPos.y, bestShiftCard);
