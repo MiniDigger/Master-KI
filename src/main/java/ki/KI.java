@@ -24,6 +24,7 @@ public abstract class KI {
 
 	final int WALLWEIGHT = 5;
 	final int SPACEWEIGHT = 1;
+	final int TREASUREWALLWEIGHT = 50;
 
 	Point getPositionOfTreasure() {
 		for (int i = 0; i < 7; i++) {
@@ -117,7 +118,7 @@ public abstract class KI {
 		}
 		while (!queue.isEmpty()) {
 			PointWeightPair act = queue.poll();
-			for (PointWeightPair pair : getWeightedNeighbors(act, board)) {
+			for (PointWeightPair pair : getWeightedNeighbors(act, board, treasurePos)) {
 				PointWeightPair toCompare = weightedList.get(weightedList.indexOf(pair));
 				if (toCompare.weight > pair.weight) {
 					toCompare.weight = pair.weight;
@@ -129,29 +130,41 @@ public abstract class KI {
 		return weightedList;
 	}
 
-	private List<PointWeightPair> getWeightedNeighbors(PointWeightPair pair, Board board) {
+	private List<PointWeightPair> getWeightedNeighbors(PointWeightPair pair, Board board, Point treasurePos) {
 		Point pos = pair.point;
+		int extraWeight = pos.equals(treasurePos) ? TREASUREWALLWEIGHT : 0;
 		Openings openings = board.board[pos.y][pos.x].getOpenings();
 		int weight = pair.weight;
 		List<PointWeightPair> weightedNeighbors = new ArrayList<>();
 
-		if (pos.y - 1 >= 0)
+		if (pos.y - 1 >= 0) {
 			weightedNeighbors.add(new PointWeightPair(new Point(pos.x, pos.y - 1),
-					weight + (openings.isTop() ? SPACEWEIGHT : WALLWEIGHT)
-							+ (board.board[pos.y - 1][pos.x].getOpenings().isBottom() ? SPACEWEIGHT : WALLWEIGHT)));
-		if (pos.x + 1 < 7)
+					weight + (openings.isTop() ? SPACEWEIGHT : WALLWEIGHT + extraWeight)
+							+ (board.board[pos.y - 1][pos.x].getOpenings().isBottom() ? SPACEWEIGHT
+									: WALLWEIGHT + (pos.y - 1 == treasurePos.y && pos.x == treasurePos.x
+											? TREASUREWALLWEIGHT : 0))));
+		}
+		if (pos.x + 1 < 7) {
 			weightedNeighbors.add(new PointWeightPair(new Point(pos.x + 1, pos.y),
-					weight + (openings.isRight() ? SPACEWEIGHT : WALLWEIGHT)
-							+ (board.board[pos.y][pos.x + 1].getOpenings().isLeft() ? SPACEWEIGHT : WALLWEIGHT)));
-		if (pos.y + 1 < 7)
+					weight + (openings.isRight() ? SPACEWEIGHT : WALLWEIGHT + extraWeight)
+							+ (board.board[pos.y][pos.x + 1].getOpenings().isLeft() ? SPACEWEIGHT
+									: WALLWEIGHT + (pos.y == treasurePos.y && pos.x + 1 == treasurePos.x
+											? TREASUREWALLWEIGHT : 0))));
+		}
+		if (pos.y + 1 < 7) {
 			weightedNeighbors.add(new PointWeightPair(new Point(pos.x, pos.y + 1),
-					weight + (openings.isBottom() ? SPACEWEIGHT : WALLWEIGHT)
-							+ (board.board[pos.y + 1][pos.x].getOpenings().isTop() ? SPACEWEIGHT : WALLWEIGHT)));
-		if (pos.x - 1 >= 0)
+					weight + (openings.isBottom() ? SPACEWEIGHT : WALLWEIGHT + extraWeight)
+							+ (board.board[pos.y + 1][pos.x].getOpenings().isTop() ? SPACEWEIGHT
+									: WALLWEIGHT + (pos.y + 1 == treasurePos.y && pos.x == treasurePos.x
+											? TREASUREWALLWEIGHT : 0))));
+		}
+		if (pos.x - 1 >= 0) {
 			weightedNeighbors.add(new PointWeightPair(new Point(pos.x - 1, pos.y),
-					weight + (openings.isLeft() ? SPACEWEIGHT : WALLWEIGHT)
-							+ (board.board[pos.y][pos.x - 1].getOpenings().isRight() ? SPACEWEIGHT : WALLWEIGHT)));
-
+					weight + (openings.isLeft() ? SPACEWEIGHT : WALLWEIGHT + extraWeight)
+							+ (board.board[pos.y][pos.x - 1].getOpenings().isRight() ? SPACEWEIGHT
+									: WALLWEIGHT + (pos.y == treasurePos.y && pos.x - 1 == treasurePos.x
+											? TREASUREWALLWEIGHT : 0))));
+		}
 		return weightedNeighbors;
 	}
 
