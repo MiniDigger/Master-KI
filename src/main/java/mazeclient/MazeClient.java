@@ -114,6 +114,8 @@ public class MazeClient {
 			MazeCom msg = read();
 			if (msg.getMcType() == MazeComType.WIN) {
 				winHandler.handle(msg.getWinMessage());
+				disconnect();
+				return;
 			}
 			if (msg.getMcType() != MazeComType.AWAITMOVE) {
 				errorHandler.handle(msg, MazeComType.AWAITMOVE);
