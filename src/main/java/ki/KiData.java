@@ -67,7 +67,11 @@ public class KiData {
 		treasure=data.getTreasure();
 		oldTreasures = treasuresToGo;
 		card = boardType.getShiftCard();
-		forbiddenPos = new Point(boardType.getForbidden().getCol(), boardType.getForbidden().getRow());
+		if (boardType.getForbidden() != null) {
+			forbiddenPos = new Point(boardType.getForbidden().getCol(), boardType.getForbidden().getRow());
+		} else {
+			forbiddenPos = new Point(0, 0);
+		}
 	}
 
 }

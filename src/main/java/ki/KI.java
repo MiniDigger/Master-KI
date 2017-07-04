@@ -36,6 +36,7 @@ public abstract class KI {
 		}
 		if (data.treasure.equals(data.card.getTreasure()))
 			return data.playerPos;
+		System.out.println("no treasure found. WHO STOLE MY TREASURE?");
 		return null;
 	}
 

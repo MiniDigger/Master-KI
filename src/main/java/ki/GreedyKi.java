@@ -14,8 +14,11 @@ public class GreedyKi extends KI {
 
 	@Override
 	public void move() {
-		Point treasurePos = getPositionOfTreasure();
 		Point playerPos = data.playerPos;
+		Point treasurePos = getPositionOfTreasure();
+		if (treasurePos == null) {
+			treasurePos = (Point) playerPos.clone();
+		}
 		boolean treasureOnShift = treasurePos.equals(playerPos);
 		// art der karte -> anzahl drehungen
 		int rotateCount = isCardIShape(data.card) ? 1 : 3;
