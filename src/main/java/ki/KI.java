@@ -22,6 +22,9 @@ public abstract class KI {
 	protected ObjectFactory of;
 	protected MazeClient client;
 
+	final int WALLWEIGHT = 5;
+	final int SPACEWEIGHT = 1;
+
 	Point getPositionOfTreasure() {
 		for (int i = 0; i < 7; i++) {
 			for (int j = 0; j < 7; j++) {
@@ -133,17 +136,21 @@ public abstract class KI {
 		List<PointWeightPair> weightedNeighbors = new ArrayList<>();
 
 		if (pos.y - 1 >= 0)
-			weightedNeighbors.add(new PointWeightPair(new Point(pos.x, pos.y - 1), weight + (openings.isTop() ? 1 : 5)
-					+ (board.board[pos.y - 1][pos.x].getOpenings().isBottom() ? 1 : 5)));
+			weightedNeighbors.add(new PointWeightPair(new Point(pos.x, pos.y - 1),
+					weight + (openings.isTop() ? SPACEWEIGHT : WALLWEIGHT)
+							+ (board.board[pos.y - 1][pos.x].getOpenings().isBottom() ? SPACEWEIGHT : WALLWEIGHT)));
 		if (pos.x + 1 < 7)
-			weightedNeighbors.add(new PointWeightPair(new Point(pos.x + 1, pos.y), weight + (openings.isRight() ? 1 : 5)
-					+ (board.board[pos.y][pos.x + 1].getOpenings().isLeft() ? 1 : 5)));
+			weightedNeighbors.add(new PointWeightPair(new Point(pos.x + 1, pos.y),
+					weight + (openings.isRight() ? SPACEWEIGHT : WALLWEIGHT)
+							+ (board.board[pos.y][pos.x + 1].getOpenings().isLeft() ? SPACEWEIGHT : WALLWEIGHT)));
 		if (pos.y + 1 < 7)
-			weightedNeighbors.add(new PointWeightPair(new Point(pos.x, pos.y + 1), weight
-					+ (openings.isBottom() ? 1 : 5) + (board.board[pos.y + 1][pos.x].getOpenings().isTop() ? 1 : 5)));
+			weightedNeighbors.add(new PointWeightPair(new Point(pos.x, pos.y + 1),
+					weight + (openings.isBottom() ? SPACEWEIGHT : WALLWEIGHT)
+							+ (board.board[pos.y + 1][pos.x].getOpenings().isTop() ? SPACEWEIGHT : WALLWEIGHT)));
 		if (pos.x - 1 >= 0)
-			weightedNeighbors.add(new PointWeightPair(new Point(pos.x - 1, pos.y), weight + (openings.isLeft() ? 1 : 5)
-					+ (board.board[pos.y][pos.x - 1].getOpenings().isRight() ? 1 : 5)));
+			weightedNeighbors.add(new PointWeightPair(new Point(pos.x - 1, pos.y),
+					weight + (openings.isLeft() ? SPACEWEIGHT : WALLWEIGHT)
+							+ (board.board[pos.y][pos.x - 1].getOpenings().isRight() ? SPACEWEIGHT : WALLWEIGHT)));
 
 		return weightedNeighbors;
 	}
