@@ -22,7 +22,7 @@ public abstract class KI {
 	final int SPACEWEIGHT = 1;
 	final int TREASUREWALLWEIGHT = 5;
 	final int FIXEDCARDBONUS = 2;
-	final int NEXTTOTREASUREWEIGHT = 2;
+	final int NEXTTOTREASUREWEIGHT = 5;
 
 	Point getPositionOfTreasure() {
 		for (int i = 0; i < 7; i++) {
@@ -126,6 +126,20 @@ public abstract class KI {
 				}
 			}
 		}
+
+		for (PointWeightPair pw : weightedList) {
+			Point pos = pw.point;
+			int weight = pw.weight;
+			// bonus for fixed cards
+			if (pos.x % 2 == 0 && pos.y % 2 == 0 && weight > FIXEDCARDBONUS) {
+				weight -= FIXEDCARDBONUS;
+			}
+			// malus for position next to treasure
+			if (Math.abs(pos.x - treasurePos.x) + Math.abs(pos.y - treasurePos.y) <= 1) {
+				weight += NEXTTOTREASUREWEIGHT;
+			}
+		}
+
 		return weightedList;
 	}
 
@@ -136,14 +150,15 @@ public abstract class KI {
 		int weight = pair.weight;
 		List<PointWeightPair> weightedNeighbors = new ArrayList<>();
 
-		// bonus for fixed cards
-		if (pos.x % 2 == 0 && pos.y % 2 == 0 && weight > FIXEDCARDBONUS) {
-			weight -= FIXEDCARDBONUS;
-		}
-		// malus for position next to treasure
-		if (Math.abs(pos.x - treasurePos.x) + Math.abs(pos.y - treasurePos.y) <= 1) {
-			weight += NEXTTOTREASUREWEIGHT;
-		}
+		// // bonus for fixed cards
+		// if (pos.x % 2 == 0 && pos.y % 2 == 0 && weight > FIXEDCARDBONUS) {
+		// weight -= FIXEDCARDBONUS;
+		// }
+		// // malus for position next to treasure
+		// if (Math.abs(pos.x - treasurePos.x) + Math.abs(pos.y - treasurePos.y)
+		// <= 1) {
+		// weight += NEXTTOTREASUREWEIGHT;
+		// }
 
 		if (pos.y - 1 >= 0) {
 			weightedNeighbors.add(new PointWeightPair(new Point(pos.x, pos.y - 1),
