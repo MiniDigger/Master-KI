@@ -126,9 +126,17 @@ public class MazeClient {
 			AwaitMoveMessageType awaitMoveMsg = msg.getAwaitMoveMessage();
 			readDataHandler.handleData(awaitMoveMsg);
 
-			// send move (handler has to call move!)
-			moveHandler.doMove();
-
+			if (moveTry != 3) {
+				// send move (handler has to call move!)
+				moveHandler.doMove();
+			} else {
+				System.out.println("DO DEFAULT MOVE");
+				System.out.println("DO DEFAULT MOVE");
+				System.out.println("DO DEFAULT MOVE");
+				System.out.println("DO DEFAULT MOVE");
+				System.out.println("DO DEFAULT MOVE");
+				//TODO do default move
+			}
 			// check if move was ok
 			MazeCom mazeCom = read();
 			if (mazeCom.getMcType() != MazeComType.ACCEPT) {
