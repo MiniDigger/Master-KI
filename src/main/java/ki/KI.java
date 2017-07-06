@@ -18,11 +18,11 @@ public abstract class KI {
 	protected ObjectFactory of;
 	protected MazeClient client;
 
-	final int WALLWEIGHT = 2;
+	final int WALLWEIGHT = 3;
 	final int SPACEWEIGHT = 1;
 	final int TREASUREWALLWEIGHT = 5;
 	final int FIXEDCARDBONUS = 2;
-	final int NEXTTOTREASUREWEIGHT = 5;
+	final int NEXTTOTREASUREWEIGHT = 3;
 
 	Point getPositionOfTreasure() {
 		for (int i = 0; i < 7; i++) {
@@ -127,16 +127,16 @@ public abstract class KI {
 			}
 		}
 
-		for (PointWeightPair pw : weightedList) {
+		for (int i = 0; i < weightedList.size(); i++) {
+			PointWeightPair pw = weightedList.get(i);
 			Point pos = pw.point;
-			int weight = pw.weight;
 			// bonus for fixed cards
-			if (pos.x % 2 == 0 && pos.y % 2 == 0 && weight > FIXEDCARDBONUS) {
-				weight -= FIXEDCARDBONUS;
+			if (pos.x % 2 == 0 && pos.y % 2 == 0 && pw.weight > FIXEDCARDBONUS) {
+				pw.weight -= FIXEDCARDBONUS;
 			}
 			// malus for position next to treasure
-			if (Math.abs(pos.x - treasurePos.x) + Math.abs(pos.y - treasurePos.y) <= 1) {
-				weight += NEXTTOTREASUREWEIGHT;
+			if (Math.abs(pos.x - treasurePos.x) + Math.abs(pos.y - treasurePos.y) == 1) {
+				pw.weight += NEXTTOTREASUREWEIGHT;
 			}
 		}
 
