@@ -116,7 +116,80 @@ public class GreedyKi extends KI {
 					continue;
 				}
 			}
+			if (!randShift) {
+				// shifte höchstmöglichen Spieler
+				// wenn kein Shift möglich, random Shift
+				Point p = data.enemies.get(playerWithMostTreasures);
+				int x = p.x;
+				int y = p.y;
+				if ((x == 1 || x == 3 || x == 5) || (y == 1 || y == 3 || y == 5)) {
+					// shifte höchsten Spieler
+					int shiftPosX = x;
+					int shiftPosY = 0;
+					if (shiftPosX == data.forbiddenPos.x && shiftPosY == data.forbiddenPos.y) {
+						shiftPosX = 6;
+						shiftPosY = y;
+					}
+					bestShiftPos = new Point(shiftPosX, shiftPosY);
+				} else {
+					int secondPlayer = -1;
+					int secondTreasures = Integer.MAX_VALUE;
+					for (int i = 0; i < data.oldTreasures.size(); i++) {
+						if (data.oldTreasures.get(i).getPlayer() == MazeClient.playerId
+								|| data.oldTreasures.get(i).getPlayer() == playerWithMostTreasures) {
+							continue;
+						}
+						if (data.oldTreasures.get(i).getTreasures() < secondTreasures) {
+							secondTreasures = data.oldTreasures.get(i).getTreasures();
+							secondPlayer = data.oldTreasures.get(i).getPlayer();
+						}
+					}
+					if (secondPlayer != -1) {
+						p = data.enemies.get(secondPlayer);
+						x = p.x;
+						y = p.y;
+						if ((x == 1 || x == 3 || x == 5) || (y == 1 || y == 3 || y == 5)) {
+							int shiftPosX = x;
+							int shiftPosY = 0;
+							if (shiftPosX == data.forbiddenPos.x && shiftPosY == data.forbiddenPos.y) {
+								shiftPosX = 6;
+								shiftPosY = y;
+							}
+							bestShiftPos = new Point(shiftPosX, shiftPosY);
+						} else {
+							int lastPlayer = -1;
+							int lastTreasures = Integer.MAX_VALUE;
+							for (int i = 0; i < data.oldTreasures.size(); i++) {
+								if (data.oldTreasures.get(i).getPlayer() == MazeClient.playerId
+										|| data.oldTreasures.get(i).getPlayer() == playerWithMostTreasures
+										|| data.oldTreasures.get(i).getPlayer() == secondPlayer) {
+									continue;
+								}
+								if (data.oldTreasures.get(i).getTreasures() < lastTreasures) {
+									lastTreasures = data.oldTreasures.get(i).getTreasures();
+									lastPlayer = data.oldTreasures.get(i).getPlayer();
+								}
+							}
+							if (lastPlayer != -1) {
+								p = data.enemies.get(secondPlayer);
+								x = p.x;
+								y = p.y;
+								if ((x == 1 || x == 3 || x == 5) || (y == 1 || y == 3 || y == 5)) {
+									// shifte letzten Spieler
+									int shiftPosX = x;
+									int shiftPosY = 0;
+									if (shiftPosX == data.forbiddenPos.x && shiftPosY == data.forbiddenPos.y) {
+										shiftPosX = 6;
+										shiftPosY = y;
+									}
+									bestShiftPos = new Point(shiftPosX, shiftPosY);
+								}
+							}
+						}
+					}
+				}
+			}
+			client.move(bestMove.x, bestMove.y, bestShiftPos.x, bestShiftPos.y, bestShiftCard);
 		}
-		client.move(bestMove.x, bestMove.y, bestShiftPos.x, bestShiftPos.y, bestShiftCard);
 	}
 }
