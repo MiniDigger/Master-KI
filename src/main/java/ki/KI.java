@@ -1,18 +1,14 @@
 package ki;
 
-import java.awt.Point;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.PriorityQueue;
-import java.util.Queue;
-import java.util.Set;
-
 import mazeclient.MazeClient;
 import mazeclient.generated.CardType;
 import mazeclient.generated.CardType.Openings;
 import mazeclient.generated.ObjectFactory;
+
+import java.awt.*;
+import java.util.*;
+import java.util.List;
+import java.util.Queue;
 
 public abstract class KI {
 
@@ -24,7 +20,8 @@ public abstract class KI {
 
 	final int WALLWEIGHT = 5;
 	final int SPACEWEIGHT = 1;
-	final int TREASUREWALLWEIGHT = 50;
+	final int TREASUREWALLWEIGHT = 0;
+	final int FIXEDCARDBONUS = 0;
 
 	Point getPositionOfTreasure() {
 		for (int i = 0; i < 7; i++) {
@@ -47,8 +44,8 @@ public abstract class KI {
 
 	public boolean isCardIShape(CardType card) {
 		Openings openings = card.getOpenings();
-		return (openings.isTop() && openings.isBottom() && !openings.isLeft() && !openings.isRight())
-				|| (!openings.isTop() && !openings.isBottom() && openings.isLeft() && openings.isRight());
+		return (openings.isTop() && openings.isBottom() && !openings.isLeft() && !openings.isRight()) || (
+				!openings.isTop() && !openings.isBottom() && openings.isLeft() && openings.isRight());
 	}
 
 	/**
@@ -138,33 +135,46 @@ public abstract class KI {
 		int weight = pair.weight;
 		List<PointWeightPair> weightedNeighbors = new ArrayList<>();
 
+		// bonus for fixed cards
+		if (pos.x % 2 == 0 && pos.y % 2 == 0 && weight > FIXEDCARDBONUS) {
+			weight -= FIXEDCARDBONUS;
+		}
+
 		if (pos.y - 1 >= 0) {
 			weightedNeighbors.add(new PointWeightPair(new Point(pos.x, pos.y - 1),
-					weight + (openings.isTop() ? SPACEWEIGHT : WALLWEIGHT + extraWeight)
-							+ (board.board[pos.y - 1][pos.x].getOpenings().isBottom() ? SPACEWEIGHT
-									: WALLWEIGHT + (pos.y - 1 == treasurePos.y && pos.x == treasurePos.x
-											? TREASUREWALLWEIGHT : 0))));
+					weight + (openings.isTop() ? SPACEWEIGHT : WALLWEIGHT + extraWeight) + (board.board[pos.y
+							- 1][pos.x].getOpenings().isBottom() ?
+							SPACEWEIGHT :
+							WALLWEIGHT + (pos.y - 1 == treasurePos.y && pos.x == treasurePos.x ?
+									TREASUREWALLWEIGHT :
+									0))));
 		}
 		if (pos.x + 1 < 7) {
 			weightedNeighbors.add(new PointWeightPair(new Point(pos.x + 1, pos.y),
-					weight + (openings.isRight() ? SPACEWEIGHT : WALLWEIGHT + extraWeight)
-							+ (board.board[pos.y][pos.x + 1].getOpenings().isLeft() ? SPACEWEIGHT
-									: WALLWEIGHT + (pos.y == treasurePos.y && pos.x + 1 == treasurePos.x
-											? TREASUREWALLWEIGHT : 0))));
+					weight + (openings.isRight() ? SPACEWEIGHT : WALLWEIGHT + extraWeight) + (board.board[pos.y][pos.x
+							+ 1].getOpenings().isLeft() ?
+							SPACEWEIGHT :
+							WALLWEIGHT + (pos.y == treasurePos.y && pos.x + 1 == treasurePos.x ?
+									TREASUREWALLWEIGHT :
+									0))));
 		}
 		if (pos.y + 1 < 7) {
 			weightedNeighbors.add(new PointWeightPair(new Point(pos.x, pos.y + 1),
-					weight + (openings.isBottom() ? SPACEWEIGHT : WALLWEIGHT + extraWeight)
-							+ (board.board[pos.y + 1][pos.x].getOpenings().isTop() ? SPACEWEIGHT
-									: WALLWEIGHT + (pos.y + 1 == treasurePos.y && pos.x == treasurePos.x
-											? TREASUREWALLWEIGHT : 0))));
+					weight + (openings.isBottom() ? SPACEWEIGHT : WALLWEIGHT + extraWeight) + (board.board[pos.y
+							+ 1][pos.x].getOpenings().isTop() ?
+							SPACEWEIGHT :
+							WALLWEIGHT + (pos.y + 1 == treasurePos.y && pos.x == treasurePos.x ?
+									TREASUREWALLWEIGHT :
+									0))));
 		}
 		if (pos.x - 1 >= 0) {
 			weightedNeighbors.add(new PointWeightPair(new Point(pos.x - 1, pos.y),
-					weight + (openings.isLeft() ? SPACEWEIGHT : WALLWEIGHT + extraWeight)
-							+ (board.board[pos.y][pos.x - 1].getOpenings().isRight() ? SPACEWEIGHT
-									: WALLWEIGHT + (pos.y == treasurePos.y && pos.x - 1 == treasurePos.x
-											? TREASUREWALLWEIGHT : 0))));
+					weight + (openings.isLeft() ? SPACEWEIGHT : WALLWEIGHT + extraWeight) + (board.board[pos.y][pos.x
+							- 1].getOpenings().isRight() ?
+							SPACEWEIGHT :
+							WALLWEIGHT + (pos.y == treasurePos.y && pos.x - 1 == treasurePos.x ?
+									TREASUREWALLWEIGHT :
+									0))));
 		}
 		return weightedNeighbors;
 	}
