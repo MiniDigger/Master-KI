@@ -222,6 +222,24 @@ public abstract class KI {
 		return ((x % 6 == 0 && y % 2 == 1) || (y % 6 == 0 && x % 2 == 1));
 	}
 
-	public abstract void move();
+	public abstract void move(int moveTry);
+	
+	protected void makeStandardMove() {
+		System.out.println("Do standard move");
+		Point forbidden = data.forbiddenPos;
+		Point shiftPos = null;
+		if (forbidden.x == 1 && forbidden.y == 0) {
+			shiftPos = new Point(0, 1);
+		} else {
+			shiftPos = new Point(1, 0);
+		}
+		Board newBoard = new Board(data.board);
+		boolean vertical = shiftPos.y == 0 || shiftPos.y == 6;
+		boolean rightTop = shiftPos.y == 0 || shiftPos.x == 6;
+		Point[] tempPos = newBoard
+				.placeShiftCard(data.card, shiftPos, data.playerPos, new Point(0, 0), vertical, rightTop);
+		Point tempPlayerPos = tempPos[0];
+		client.move(tempPlayerPos.x, tempPlayerPos.y, shiftPos.x, shiftPos.y, data.card);
+	}
 
 }

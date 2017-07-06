@@ -58,11 +58,11 @@ public class Main {
 			}
 		}));
 
-		mazeClient.setMoveHandler(() -> {
+		mazeClient.setMoveHandler((moveTry) -> {
 			if (ki == null) {
 				ki = new GreedyKi(kiData, mazeClient);
 			}
-			ki.move();
+			ki.move(moveTry);
 		});
 
 		// todo debug client (overrides KI!)

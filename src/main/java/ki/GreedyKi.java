@@ -1,14 +1,14 @@
 package ki;
 
-import mazeclient.MazeClient;
-import mazeclient.generated.CardType;
-
-import java.awt.*;
+import java.awt.Point;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
+
+import mazeclient.MazeClient;
+import mazeclient.generated.CardType;
 
 public class GreedyKi extends KI {
 
@@ -16,7 +16,11 @@ public class GreedyKi extends KI {
 		super(data, client);
 	}
 
-	@Override public void move() {
+	@Override public void move(int moveTry) {
+		if (moveTry == 3) {
+			makeStandardMove();
+			return;
+		}
 		Point playerPos = data.playerPos;
 		Point treasurePos = getPositionOfTreasure();
 		if (treasurePos == null) {

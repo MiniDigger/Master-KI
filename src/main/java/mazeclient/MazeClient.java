@@ -6,6 +6,10 @@ import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
+
+import ki.KI;
+
+import java.awt.Point;
 import java.io.IOException;
 import java.io.StringReader;
 import java.io.StringWriter;
@@ -32,7 +36,7 @@ public class MazeClient {
 	};
 	private WinHandler winHandler = (msg) -> {
 	};
-	private MoveHandler moveHandler = () -> {
+	private MoveHandler moveHandler = (moveTry) -> {
 	};
 	private ReadDataHandler readDataHandler = (data) -> {
 	};
@@ -126,17 +130,9 @@ public class MazeClient {
 			AwaitMoveMessageType awaitMoveMsg = msg.getAwaitMoveMessage();
 			readDataHandler.handleData(awaitMoveMsg);
 
-			if (moveTry != 3) {
-				// send move (handler has to call move!)
-				moveHandler.doMove();
-			} else {
-				System.out.println("DO DEFAULT MOVE");
-				System.out.println("DO DEFAULT MOVE");
-				System.out.println("DO DEFAULT MOVE");
-				System.out.println("DO DEFAULT MOVE");
-				System.out.println("DO DEFAULT MOVE");
-				//TODO do default move
-			}
+			// send move (handler has to call move!)
+			moveHandler.doMove(moveTry);
+
 			// check if move was ok
 			MazeCom mazeCom = read();
 			if (mazeCom.getMcType() != MazeComType.ACCEPT) {
@@ -149,9 +145,8 @@ public class MazeClient {
 				// doMove was ok, we are done here
 				moveTry = 0;
 			} else {
-				logger.warning(
-						"move was not accepted by server (try " + moveTry + "/3): " + acceptMessage.getErrorCode()
-								.name() + " " + acceptMessage.getErrorCode().value());
+				logger.warning("move was not accepted by server (try " + moveTry + "/3): "
+						+ acceptMessage.getErrorCode().name() + " " + acceptMessage.getErrorCode().value());
 			}
 		}
 	}
@@ -235,21 +230,25 @@ public class MazeClient {
 		return moveTry;
 	}
 
-	@FunctionalInterface interface MoveHandler {
+	@FunctionalInterface
+	interface MoveHandler {
 
-		void doMove();
+		void doMove(int moveTry);
 	}
 
-	@FunctionalInterface interface ReadDataHandler {
+	@FunctionalInterface
+	interface ReadDataHandler {
 
 		void handleData(AwaitMoveMessageType data);
 	}
 
-	@FunctionalInterface interface ErrorHandler {
+	@FunctionalInterface
+	interface ErrorHandler {
 		void handle(MazeCom msg, MazeComType expected);
 	}
 
-	@FunctionalInterface interface WinHandler {
+	@FunctionalInterface
+	interface WinHandler {
 		void handle(WinMessageType msg);
 	}
 }
