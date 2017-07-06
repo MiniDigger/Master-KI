@@ -1,14 +1,14 @@
 package ki;
 
-import java.awt.Point;
+import mazeclient.MazeClient;
+import mazeclient.generated.CardType;
+
+import java.awt.*;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
-
-import mazeclient.MazeClient;
-import mazeclient.generated.CardType;
 
 public class GreedyKi extends KI {
 
@@ -16,8 +16,7 @@ public class GreedyKi extends KI {
 		super(data, client);
 	}
 
-	@Override
-	public void move() {
+	@Override public void move() {
 		Point playerPos = data.playerPos;
 		Point treasurePos = getPositionOfTreasure();
 		if (treasurePos == null) {
@@ -34,7 +33,8 @@ public class GreedyKi extends KI {
 		CardType bestShiftCard = null;
 
 		CardType shiftCard = data.card;
-		outer: for (int i = 0; i < POSTOSHIFTCARD.length; i++) {
+		outer:
+		for (int i = 0; i < POSTOSHIFTCARD.length; i++) {
 			Point shiftPoint = new Point(POSTOSHIFTCARD[i][0], POSTOSHIFTCARD[i][1]);
 			if (shiftPoint.equals(data.forbiddenPos))
 				continue;
@@ -44,8 +44,8 @@ public class GreedyKi extends KI {
 				Board newBoard = new Board(data.board);
 				boolean vertical = shiftPoint.y == 0 || shiftPoint.y == 6;
 				boolean rightTop = shiftPoint.y == 0 || shiftPoint.x == 6;
-				Point[] tempPos = newBoard.placeShiftCard(shiftCard, shiftPoint, tempPlayerPos, tempTreasurePos,
-						vertical, rightTop);
+				Point[] tempPos = newBoard
+						.placeShiftCard(shiftCard, shiftPoint, tempPlayerPos, tempTreasurePos, vertical, rightTop);
 				tempPlayerPos = tempPos[0];
 				tempTreasurePos = treasureOnShift ? shiftPoint : tempPos[1];
 				if (tempTreasurePos.x < 0 || tempTreasurePos.x > 6 || tempTreasurePos.y < 0 || tempTreasurePos.y > 6)
@@ -124,13 +124,18 @@ public class GreedyKi extends KI {
 				int y = p.y;
 				if ((x == 1 || x == 3 || x == 5) || (y == 1 || y == 3 || y == 5)) {
 					// shifte höchsten Spieler
-					int shiftPosX = x;
-					int shiftPosY = 0;
-					if (shiftPosX == data.forbiddenPos.x && shiftPosY == data.forbiddenPos.y) {
-						shiftPosX = 6;
-						shiftPosY = y;
+					Point[] possibleShifts = new Point[] { new Point(x, 0), new Point(6, y), new Point(x, 6),
+							new Point(0, y) };
+
+					for (Point point : possibleShifts) {
+						if (point.x == data.forbiddenPos.x && point.y == data.forbiddenPos.y) {
+							continue;
+						}
+						if (!isLoosePosition(point.x, point.y)) {
+							continue;
+						}
+						bestShiftPos = new Point(point.x, point.y);
 					}
-					bestShiftPos = new Point(shiftPosX, shiftPosY);
 				} else {
 					int secondPlayer = -1;
 					int secondTreasures = Integer.MAX_VALUE;
