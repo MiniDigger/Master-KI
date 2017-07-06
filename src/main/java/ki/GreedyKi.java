@@ -189,7 +189,7 @@ public class GreedyKi extends KI {
 					}
 				}
 			}
-			client.move(bestMove.x, bestMove.y, bestShiftPos.x, bestShiftPos.y, bestShiftCard);
 		}
+		client.move(bestMove.x, bestMove.y, bestShiftPos.x, bestShiftPos.y, bestShiftCard);
 	}
 }
