@@ -154,13 +154,18 @@ public class GreedyKi extends KI {
 						x = p.x;
 						y = p.y;
 						if ((x == 1 || x == 3 || x == 5) || (y == 1 || y == 3 || y == 5)) {
-							int shiftPosX = x;
-							int shiftPosY = 0;
-							if (shiftPosX == data.forbiddenPos.x && shiftPosY == data.forbiddenPos.y) {
-								shiftPosX = 6;
-								shiftPosY = y;
+							Point[] possibleShifts = new Point[] { new Point(x, 0), new Point(6, y), new Point(x, 6),
+									new Point(0, y) };
+
+							for (Point point : possibleShifts) {
+								if (point.x == data.forbiddenPos.x && point.y == data.forbiddenPos.y) {
+									continue;
+								}
+								if (!isLoosePosition(point.x, point.y)) {
+									continue;
+								}
+								bestShiftPos = new Point(point.x, point.y);
 							}
-							bestShiftPos = new Point(shiftPosX, shiftPosY);
 						} else {
 							int lastPlayer = -1;
 							int lastTreasures = Integer.MAX_VALUE;
@@ -181,13 +186,18 @@ public class GreedyKi extends KI {
 								y = p.y;
 								if ((x == 1 || x == 3 || x == 5) || (y == 1 || y == 3 || y == 5)) {
 									// shifte letzten Spieler
-									int shiftPosX = x;
-									int shiftPosY = 0;
-									if (shiftPosX == data.forbiddenPos.x && shiftPosY == data.forbiddenPos.y) {
-										shiftPosX = 6;
-										shiftPosY = y;
+									Point[] possibleShifts = new Point[] { new Point(x, 0), new Point(6, y), new Point(x, 6),
+											new Point(0, y) };
+
+									for (Point point : possibleShifts) {
+										if (point.x == data.forbiddenPos.x && point.y == data.forbiddenPos.y) {
+											continue;
+										}
+										if (!isLoosePosition(point.x, point.y)) {
+											continue;
+										}
+										bestShiftPos = new Point(point.x, point.y);
 									}
-									bestShiftPos = new Point(shiftPosX, shiftPosY);
 								}
 							}
 						}
