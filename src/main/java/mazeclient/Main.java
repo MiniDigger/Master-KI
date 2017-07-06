@@ -38,7 +38,7 @@ public class Main {
 			return;
 		}
 
-		result = mazeClient.handshake("Martin");
+		result = mazeClient.handshake("6-MasterKI");
 		if (!result) {
 			logger.severe("Handshake failed!");
 			mazeClient.disconnect();
