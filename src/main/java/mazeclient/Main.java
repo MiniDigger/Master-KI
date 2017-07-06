@@ -1,13 +1,13 @@
 package mazeclient;
 
-import java.io.InputStreamReader;
-import java.util.Scanner;
-import java.util.logging.Logger;
-
 import ki.GreedyKi;
 import ki.KI;
 import ki.KiData;
 import mazeclient.generated.CardType;
+
+import java.io.InputStreamReader;
+import java.util.Scanner;
+import java.util.logging.Logger;
 
 /**
  * Created by mbenndorf on 20.06.2017.
@@ -25,8 +25,13 @@ public class Main {
 	private static CardType shiftCard;
 
 	public static void main(String[] args) {
+		String hostname = "localhost";
+		if (args.length >= 0) {
+			hostname = args[0];
+		}
+		logger.info("Connecting to " + hostname + ":5123");
 		MazeClient mazeClient = new MazeClient();
-		boolean result = mazeClient.connect("localhost", 5123);
+		boolean result = mazeClient.connect(hostname, 5123);
 		if (!result) {
 			logger.severe("Could not connect!");
 			mazeClient.disconnect();
